@@ -1,5 +1,10 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
+
+def compute_node_coordinates(number_of_nodes,radius):
+    coordinates=[(np.sin(np.pi*2*i/number_of_nodes)*radius, np.cos(np.pi*2*i/number_of_nodes)*radius) for i in range(number_of_nodes)]
+    return coordinates
 
 
 def read_graph_representation_from_file(file_name, option):
@@ -28,8 +33,10 @@ def get_info_from_user():
 def draw_nodes(data_matrix):
     g=nx.Graph()
     node_value=1 
+    number_of_nodes=len(data_matrix)
+    coordinates=compute_node_coordinates(number_of_nodes,10)
     for i in data_matrix:
-        g.add_node(node_value) 
+        g.add_node(node_value,pos=coordinates[node_value-1]) 
         node_value+=1 
     return g
 
@@ -78,8 +85,8 @@ def draw_edges(g,data_matrix,data_type):
 
 
 def display_graph(g):
-    pos=nx.circular_layout(g) # places all the nodes on the circle
-    nx.draw_networkx(g,pos=pos)
+    pos=nx.get_node_attributes(g,'pos')
+    nx.draw(g,pos)
     plt.axis('square') # square plot provides the real circle shape of graph
     plt.show()
 
