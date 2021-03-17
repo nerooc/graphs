@@ -34,7 +34,7 @@ def draw_nodes(data_matrix):
     g=nx.Graph()
     node_value=1 
     number_of_nodes=len(data_matrix)
-    coordinates=compute_node_coordinates(number_of_nodes,10)
+    coordinates=compute_node_coordinates(number_of_nodes,number_of_nodes*1.0)
     for i in data_matrix:
         g.add_node(node_value,pos=coordinates[node_value-1]) 
         node_value+=1 
@@ -86,7 +86,7 @@ def draw_edges(g,data_matrix,data_type):
 
 def display_graph(g):
     pos=nx.get_node_attributes(g,'pos')
-    nx.draw(g,pos)
+    nx.draw(g,pos,node_size=10000/len(pos),with_labels=True)
     plt.axis('square') # square plot provides the real circle shape of graph
     plt.show()
 
