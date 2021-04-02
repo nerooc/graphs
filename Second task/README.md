@@ -4,4 +4,4 @@
 
 2. Put your data (Adjacency matrix, Adjacency list or Incidence matrix) in a file in the same directory. (or simply download the .txt files from this repo so you could see the required data format).
 
-3. Run the program with command python3 draw.py. 
+3. Run the program with command python3 task2.py. 
