@@ -1,8 +1,13 @@
 import os
 
+from task2 import draw_nodes
+from task2 import draw_edges
+from task2 import display_graph
+
 # functions
 #######################################
-# output could be Adjacency matrix or file_data + info which representatnion it is
+# output could be Adjacency matrix or file_data + info which representatnion it is.
+# Info as:
 # 'a' -> Adjacency matrix
 # 'b' -> Adjacency list
 # 'c' -> Incidence matrix
@@ -183,6 +188,10 @@ if __name__ == "__main__":
     print("Adjacency matrix -> Incidence matrix:")
     incidence_matrix = convert_Adjacency_matrix_into_Incidence_matrix(data_matrix)
     print(*incidence_matrix, sep="\n")
+    #draw graph from task 2
+    graph=draw_nodes(data_matrix)
+    graph=draw_edges(graph,data_matrix)
+    display_graph(graph)
     #######################################
 
   elif chosen_option == "b":
@@ -196,6 +205,10 @@ if __name__ == "__main__":
     print()
     print("Adjacency list -> Incidence matrix:")
     print(*incidence_matrix,sep="\n")
+    #draw graph from task 2
+    graph=draw_nodes(adjacency_matrix)
+    graph=draw_edges(graph,adjacency_matrix)
+    display_graph(graph)
     #######################################
 
   elif chosen_option == "c":  
@@ -212,5 +225,9 @@ if __name__ == "__main__":
       for j in range(len(adj_list[i])):
         print(adj_list[i][j],end=" ")
       print()
+    #draw graph from task 2
+    graph=draw_nodes(adjacency_matrix)
+    graph=draw_edges(graph,adjacency_matrix)
+    display_graph(graph)
     #######################################
 
