@@ -1,3 +1,4 @@
+import os
 
 # functions
 #######################################
@@ -7,7 +8,7 @@
 # 'c' -> Incidence matrix
 def read_graph_file_return_Adjacency_matrix(file_name, return_input_info = False):
   try:
-    with open(file_name, "r") as f:
+    with open(os.path.dirname(__file__) + "/InputFiles/" + file_name, "r") as f:
       file_data = [[int(num) for num in line.split()] for line in f]
 
       #decode which repressentation is in input
