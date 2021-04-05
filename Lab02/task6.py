@@ -1,4 +1,31 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
 from graph_processor_temp import read_graph_file_return_Adjacency_matrix, convert_Adjacency_matrix_into_Adjacency_list
+
+def draw_hamilton(g_am, cycle):
+    g = nx.Graph()
+    node_value = 1 
+    labels = {}
+    number_of_nodes = len(g_am)
+    coordinates=[(np.sin(np.pi * 2 * i / number_of_nodes) * number_of_nodes, np.cos(np.pi * 2 * i / number_of_nodes) * number_of_nodes) for i in range(number_of_nodes)]
+
+    for i in g_am:
+        node_label = str(node_value) + "(" + str(cycle.index(node_value) + 1) +")"
+        labels[node_value] = node_label
+        g.add_node(node_value, pos = coordinates[node_value - 1])
+        node_value += 1 
+
+    for i in range(len(g_am)):
+        for j in range(i + 1 , len(g_am)):
+            if(g_am[i][j] == 1):
+                g.add_edge(i + 1, j + 1)
+
+    pos = nx.get_node_attributes(g,'pos')
+    nx.draw(g, pos, node_size = 10000/len(pos), with_labels = False)
+    nx.draw_networkx_labels(g, pos, labels)
+    plt.axis('square')
+    plt.show()
 
 def hamilton_cycle(graph, v = 0, stack = None):
     if stack is None:
@@ -27,7 +54,8 @@ def hamilton_cycle(graph, v = 0, stack = None):
 def is_hamiltonian():
     print("Hamilton stack Finder - Please type the name of your file:")
     file_name = input()
-    graph = convert_Adjacency_matrix_into_Adjacency_list(read_graph_file_return_Adjacency_matrix(file_name))
+    graph_adj_mat = read_graph_file_return_Adjacency_matrix(file_name)
+    graph = convert_Adjacency_matrix_into_Adjacency_list(graph_adj_mat)
 
     for i in range(len(graph)):
         for j in range(len(graph[i])):
@@ -38,6 +66,8 @@ def is_hamiltonian():
     if result_cycle: 
         print("The graph is Hamiltonian and the cycle is:")
         print(result_cycle)
+        draw_hamilton(graph_adj_mat, result_cycle)
+
     else:
         print("There is no Hamiltonian cycle in the graph.")
 
