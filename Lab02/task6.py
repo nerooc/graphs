@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+
 from graph_processor_temp import read_graph_file_return_Adjacency_matrix, convert_Adjacency_matrix_into_Adjacency_list
 
 def draw_hamilton(g_am, cycle):
@@ -52,7 +53,7 @@ def hamilton_cycle(graph, v = 0, stack = None):
 
 
 def is_hamiltonian():
-    print("Hamilton stack Finder - Please type the name of your file:")
+    print("Hamilton cycle finder - Please type the name of your file:")
     file_name = input()
     graph_adj_mat = read_graph_file_return_Adjacency_matrix(file_name)
     graph = convert_Adjacency_matrix_into_Adjacency_list(graph_adj_mat)

@@ -1,4 +1,5 @@
 import os
+# temporary task1 copy for Lab02 uses
 
 # functions
 #######################################
@@ -213,4 +214,3 @@ if __name__ == "__main__":
         print(adj_list[i][j],end=" ")
       print()
     #######################################
-
