@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-from task1 import read_graph_file_return_Adjacency_matrix
+#from main import read_graph_file_return_Adjacency_matrix
 
 
 def compute_node_coordinates(number_of_nodes,radius):
@@ -45,10 +45,17 @@ def display_graph(g):
     plt.axis('square') # square plot provides the real circle shape of graph
     plt.show()
 
+def display_graph_coloured_sequences(g,node_colors_tab):
+    """Function displaying graph with each sequence coloured different"""
+    pos=nx.get_node_attributes(g,'pos')
+    nx.draw(g,pos,node_size=10000/len(pos),node_color=node_colors_tab,with_labels=True)
+    plt.axis('square') # square plot provides the real circle shape of graph
+    plt.show()
 
-if __name__ == "__main__":
-    file_name=get_info_from_user()
-    data_matrix=read_graph_file_return_Adjacency_matrix(file_name) #using the function from task 1
-    graph=draw_nodes(data_matrix)
-    graph=draw_edges(graph,data_matrix)
+def draw_graph(data_matrix,node_colors_tab=None):
+  graph=draw_nodes(data_matrix)
+  graph=draw_edges(graph,data_matrix)
+  if node_colors_tab == None:
     display_graph(graph)
+  else:
+    display_graph_coloured_sequences(graph,node_colors_tab)
