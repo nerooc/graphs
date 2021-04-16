@@ -48,7 +48,7 @@ Example:
 
 Program allows the user to draw/plot a graph based on any representation. The vertices of the graph are evenly distributed around a circle.
 
-![graph_pic](https://github.com/nerooc/graphs/blob/fix-import-errors/Lab01/Preview/graph_picture.png)
+![graph_pic](https://github.com/nerooc/graphs/blob/main/Lab01/Preview/graph_picture.png)
 
 ## Task 3 - Graph generator
 
