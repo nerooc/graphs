@@ -1,7 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-#from main import read_graph_file_return_Adjacency_matrix
 
 
 def compute_node_coordinates(number_of_nodes,radius):
