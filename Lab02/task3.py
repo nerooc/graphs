@@ -2,7 +2,7 @@
 
 '''
 Grafy i ich zastosowania
-Projekt 2, zadania: 1 oraz 3
+Projekt 2, zadanie 3
 Script by Bartosz Rogowski
 '''
 
@@ -19,10 +19,6 @@ if __name__ == '__main__':
 	if(isDegreeSequence(l)):
 		G = degSeq2adjMat(l)
 		components = COMPONENTS(G)
-		#save G to file
-		# np.savetxt("InputFiles/task3.txt", G, delimiter=" ", newline = "\n", fmt="%d")
-		# print("Output file has been saved to: 'task3.txt'")
 		drawGraph(G, components)
-		
 	else:
 		print('Given sequence IS NOT a degree sequence')
