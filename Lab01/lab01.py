@@ -190,17 +190,39 @@ def convert_Adjacency_list_into_Incidence_matrix(data_matrix):
 #task2 written by Piotr Matiaszewski
 
 def compute_node_coordinates(number_of_nodes,radius):
+	'''Function computing node coordinates from given number of nodes and graphical(visual) radius of one node in final picture.
+
+	Arguments:
+		number_of_nodes {int} -- number of nodes in the graph which position will be computed 
+		radius {integer or float} --  value determining the size of every node in the final picture
+
+	Returns:
+		list -- list containing nodes' coordinates
+	'''
 	coordinates=[(np.sin(np.pi*2*i/number_of_nodes)*radius, np.cos(np.pi*2*i/number_of_nodes)*radius) for i in range(number_of_nodes)]
 	return coordinates
 
 
 def get_info_from_user():
+	'''Function asking user for name of the input file
+
+	Returns:
+		str -- string containing file name
+	'''
 	print("Welcome to graph builder. Please type the name of your file:")
 	file_name=input()
 	return (file_name)
 
 
 def draw_nodes(data_matrix):
+	'''Function creating a grahp from given adjacency matrix and positioning every node in correct position.
+
+	Arguments:
+		data_matrix {list} -- adjacency matrix representation of graph
+
+	Returns:
+		graph {networkx.classes.graph.Graph} -- graph object with properly positioned nodes
+	'''
 	g=nx.Graph()
 	node_value=1 
 	number_of_nodes=len(data_matrix)
@@ -212,34 +234,53 @@ def draw_nodes(data_matrix):
 
 
 def draw_edges_from_adjacency_matrix(g,data_matrix): #we assume the matrix is symmetrical, what allows us to iterate through its half only
+	'''Function adding edges to graph g. Edges are read from adjacency matrix representation of the graph
+
+	Arguments:
+		g {networkx.classes.graph.Graph} -- graph object with nodes that are already set and positioned
+		data_matrix {list} -- adjacency matrix representation of graph
+
+	Returns:
+		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
+	'''
 	for i in range(len(data_matrix)):
 		for j in range(i+1,len(data_matrix)):
 			if(data_matrix[i][j]==1):
 				g.add_edge(i+1,j+1)
 	return g
 
-
-def draw_edges(g,data_matrix):
-	g=draw_edges_from_adjacency_matrix(g,data_matrix)
-	return g
-
-
 def display_graph(g):
+	'''Function displaying graph to user
+
+	Arguments:
+		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
+	'''
 	pos=nx.get_node_attributes(g,'pos')
 	nx.draw(g,pos,node_size=10000/len(pos),with_labels=True)
 	plt.axis('square') # square plot provides the real circle shape of graph
 	plt.show()
 
 def display_graph_coloured_sequences(g,node_colors_tab):
-	"""Function displaying graph with each sequence coloured different"""
+	'''Function displaying graph with colored nodes to user. 
+
+	Arguments:
+		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
+		node_colors_tab {list} -- list containing color of every node   
+	'''
 	pos=nx.get_node_attributes(g,'pos')
 	nx.draw(g,pos,node_size=10000/len(pos),node_color=node_colors_tab,with_labels=True)
 	plt.axis('square') # square plot provides the real circle shape of graph
 	plt.show()
 
 def draw_graph(data_matrix,node_colors_tab=None):
+	''' "Main" function calling other functions in order to draw graph. Depending on the second argument graph will have colored nodes or not
+
+	Arguments:
+		data_matrix {list} -- adjacency matrix representation of graph
+		node_colors_tab {list} -- list containing color of every node. If not provided, nodes will have default color   
+	'''
 	graph=draw_nodes(data_matrix)
-	graph=draw_edges(graph,data_matrix)
+	graph=draw_edges_from_adjacency_matrix(graph,data_matrix)
 	if node_colors_tab == None:
 		display_graph(graph)
 	else:
