@@ -11,11 +11,13 @@ The representations have to meet some requirements.
 
 Example:
 
+```
 0 1 1 <- first line
 
 1 0 0
 
 1 0 0 <- last line
+```
 
 ### Requirements for Adjacency list input file:
 
@@ -25,11 +27,13 @@ Example:
 
 Example:
 
+```
 1 2 3 <- first line
 
 2 1
 
 3 1 <- last line
+```
 
 ### Requirements for Incidence matrix input file:
 
@@ -38,11 +42,13 @@ Example:
 
 Example:
 
+```
 1 1 <- first line
 
 1 0
 
 0 1 <- last line
+```
 
 ## Task 2 - Graph drawer
 
@@ -52,4 +58,4 @@ Program allows the user to draw/plot a graph based on any representation. The ve
 
 ## Task 3 - Graph generator
 
-Program provides a way for an optimized graph generation based on a few variables [...].
+Program allows user to generate random graph based on number of vertices and number of edges or probability that between two vertices there exists an edge.
