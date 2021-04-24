@@ -23,7 +23,7 @@ if __name__ == "__main__":
         print(*incidence_matrix, sep="\n")
         # draw graph
         graph = draw_nodes(data_matrix)
-        graph = draw_edges(graph, data_matrix)
+        graph = draw_edges_from_adjacency_matrix(graph, data_matrix)
         display_graph(graph)
 
     elif graph_rep_type == "adjacency list":
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         print(*incidence_matrix,sep="\n")
         # draw graph
         graph = draw_nodes(adjacency_matrix)
-        graph = draw_edges(graph, adjacency_matrix)
+        graph = draw_edges_from_adjacency_matrix(graph, adjacency_matrix)
         display_graph(graph)
 
     elif graph_rep_type == "incidence matrix":    
@@ -58,5 +58,5 @@ if __name__ == "__main__":
             print()
         # draw graph
         graph = draw_nodes(adjacency_matrix)
-        graph = draw_edges(graph, adjacency_matrix)
+        graph = draw_edges_from_adjacency_matrix(graph, adjacency_matrix)
         display_graph(graph)
