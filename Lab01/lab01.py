@@ -26,80 +26,79 @@ def read_graph_file_return_Adjacency_matrix(file_name, return_input_info=False):
     try:
         with open(file_name, "r") as f:
             file_data = [[int(num) for num in line.split()] for line in f]
+            # decode which representation is in input
+            itIsList = False
+            for row in file_data:
+                for i in row:
+                    if i not in [0, 1]:
+                        itIsList = True
+                        f.seek(0)
+                        file_data2 = [[int(num) for num in remove_first(line.split())] for line in f]  # first int is number of vertex, must be removed
+                        if return_input_info:
+                            return file_data, "adjacency list"
+                        else:
+                            return convert_Adjacency_list_into_Adjacency_matrix(file_data2)
 
-        # decode which representation is in input
-        itIsList = False
-        for row in file_data:
-            for i in row:
-                if i not in [0, 1]:
-                    itIsList = True
-                    f.seek(0)
-                    file_data2 = [[int(num) for num in remove_first(line.split())] for line in
-                                  f]  # first int is number of vertex, must be removed
-                    if return_input_info:
-                        return file_data, "adjacency list"
-                    else:
-                        return convert_Adjacency_list_into_Adjacency_matrix(file_data2)
-
-        if len(file_data) == len(file_data[0]):
-            isSymmetric = True  # only a suspicion so far
-        else:
-            if return_input_info:
-                return file_data, "incidence matrix"
+            if len(file_data) == len(file_data[0]):
+                isSymmetric = True  # only a suspicion so far
             else:
-                return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
+                if return_input_info:
+                    return file_data, "incidence matrix"
+                else:
+                    return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
 
-        for i in range(len(file_data) - 1):
-            for j in range(i + 1, len(file_data)):
-                if file_data[i][j] != file_data[j][i]:
-                    isSymmetric = False
+            for i in range(len(file_data) - 1):
+                for j in range(i + 1, len(file_data)):
+                    if file_data[i][j] != file_data[j][i]:
+                        isSymmetric = False
+                        if return_input_info:
+                            return file_data, "incidence matrix"
+                        else:
+                            return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
+
+            diagonalOnlyZero = True
+            for i in range(len(file_data)):
+                if file_data[i][i] != 0:
+                    diagonalOnlyZero = False
                     if return_input_info:
                         return file_data, "incidence matrix"
                     else:
                         return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
 
-        diagonalOnlyZero = True
-        for i in range(len(file_data)):
-            if file_data[i][i] != 0:
-                diagonalOnlyZero = False
-                if return_input_info:
-                    return file_data, "incidence matrix"
+            isTwoOneInCol = True
+            count = 0
+            for i in range(len(file_data)):
+                for j in range(len(file_data)):
+                    if file_data[j][i] == 1:
+                        count += 1
+                if count != 2:
+                    isTwoOneInCol = False
+                    if return_input_info:
+                        return file_data, "adjacency matrix"
+                    else:
+                        return file_data
                 else:
-                    return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
+                    count = 0
 
-        isTwoOneInCol = True
-        count = 0
-        for i in range(len(file_data)):
-            for j in range(len(file_data)):
-                if file_data[j][i] == 1:
-                    count += 1
-            if count != 2:
-                isTwoOneInCol = False
-                if return_input_info:
-                    return file_data, "adjacency matrix"
+            if all([not itIsList, isSymmetric, diagonalOnlyZero, isTwoOneInCol]):
+                print("Your matrix could be render as Adjacency matrix or Incidence matrix!\nType 'a' if you mean Adjacency matrix and 'b' if you mean Incidence matrix:")
+                while True:
+                    chosen_option = input()
+                    if chosen_option in ["a", "b"]:
+                        break
+                    else:
+                        print("Mistyped! Choose again.\nType 'a' if you mean Adjacency matrix and 'b' if you mean Incidence matrix:")
+                if chosen_option == "a":
+                    if return_input_info:
+                        return file_data, "adjacency matrix"
+                    else:
+                        return file_data
                 else:
-                    return file_data
-            else:
-                count = 0
+                    if return_input_info:
+                        return file_data, "incidence matrix"
+                    else:
+                        return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
 
-        if all([not itIsList, isSymmetric, diagonalOnlyZero, isTwoOneInCol]):
-            print("Your matrix could be render as Adjacency matrix or Incidence matrix!\nType 'a' if you mean Adjacency matrix and 'b' if you mean Incidence matrix:")
-            while True:
-                chosen_option = input()
-                if chosen_option in ["a", "b"]:
-                    break
-                else:
-                    print("Mistyped! Choose again.\nType 'a' if you mean Adjacency matrix and 'b' if you mean Incidence matrix:")
-            if chosen_option == "a":
-                if return_input_info:
-                    return file_data, "adjacency matrix"
-                else:
-                    return file_data
-            else:
-                if return_input_info:
-                    return file_data, "incidence matrix"
-                else:
-                    return convert_Incidence_matrix_into_Adjacency_matrix(file_data)
 
     except FileNotFoundError:
         print("Sorry, there is no file called '" + file_name + "'")
