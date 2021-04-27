@@ -1,22 +1,4 @@
-from task_b import degSeq2adjMat
-from task_b import isDegreeSequence
-from task_karol.task2 import graphRandomization
-from task_karol.conversions import read_graph_file_return_Adjacency_matrix
-from task_karol.draw import draw_graph
-import numpy as np
-
-
-def generateRandomizedKRegularGraph(L):
-    """ Function generating random k-regular graphs from graph sequence given as a list L"""
-    if(isDegreeSequence(L.copy())):
-        G = degSeq2adjMat(L.copy())
-        np.savetxt("task1.txt", G, delimiter=" ", newline = "\n", fmt="%d")
-    else: 
-        print("Number of vertices and degrees is invalid.")
-        exit(-1)
-    with open('task1.txt', 'r') as f:
-        Adjacency_matrix = [[int(num) for num in line.split()] for line in f]
-    return graphRandomization(Adjacency_matrix)
+from lab02 import *
             
 if __name__ == "__main__":
     print("Enter the amount of vertices and their degree (two integer numbers)")
