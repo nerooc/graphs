@@ -10,10 +10,8 @@ from lab01 import convert_Adjacency_list_into_Adjacency_matrix #for task 2
 # functions to task 1 written by Bartosz Rogowski
 def isDegreeSequence(List_org: list):
 	'''Function checking whether sequence in given argument is a degree sequence
-
 	Arguments:
 		List_org {list} -- list that contains int values
-
 	Returns:
 		boolean -- is List a degree sequence
 	'''
@@ -205,10 +203,8 @@ def degSeq2adjMat(List_org: list):
 	''' Function converting degree sequence to adjacency matrix.
 	
 	NOTE: I assume that sequence is already proven to be a degree sequence
-
 	Arguments:
 		List_org {list} -- degree sequence
-
 	Returns:
 		A {numpy array} -- adjacency matrix made of degree sequence
 	'''
@@ -230,13 +226,11 @@ def degSeq2adjMat(List_org: list):
 
 def COMPONENTS_R(nr: int, v: int, G: np.array, comp: list):
 	'''Depth-first search starting from node v
-
 	Arguments:
 		nr {int} -- actual number of component
 		v {int} -- number of actual node
 		G {numpy array} -- adjacency matrix
 		comp {list} -- components list
-
 	Returns:
 		<does not return anything>
 	'''
@@ -255,10 +249,8 @@ def COMPONENTS_R(nr: int, v: int, G: np.array, comp: list):
 
 def COMPONENTS(G: np.array):
 	'''Function finding components of the graph 
-
 	Arguments:
 		G {numpy array} -- adjacency matrix of a graph
-
 	Returns:
 		comp {list} -- every element is a number of component for every node in graph G
 	'''
@@ -279,21 +271,48 @@ def drawGraph(G: np.array, components: list):
 	'''Function drawing graph components with different colors 
 	using function from previous project
 
-	NOTE: Function can draw up to 10 different components
+	NOTE: Function can draw up to 13 different components with colors
 
 	Arguments:
 		G {numpy array} -- adjacency matrix of a graph
 		components {list} -- list containing number of component for every vertex
 	'''
-	#defining 10 colors for each component
-	colors = ['blue', 'red', 'green', 'yellow', 'cyan', 
-		'orange', 'purple', 'pink', 'brown', 'gold']
-	node_colors = []
-	for node in range(0, len(G)):
-		number = components[node] - 1 #-1 cause components values start from 1
-		node_colors.append(colors[number])
 	print('The number of components in this graph:', max(components))
-	draw_graph(G, node_colors)
+	if max(components) > 13:
+		print("WARNING: Components number exceeded a limit for coloring mode")
+		draw_graph(G)
+	else:
+		#defining 13 colors for each component
+		colors = ['blue', 'red', 'lime', 'yellow', 'cyan', 'orange',  
+			'purple', 'green', 'pink', 'brown', 'magenta', 'gold', 'silver']
+		node_colors = []
+		for node in range(0, len(G)):
+			number = components[node] - 1 #-1 cause components values start from 1
+			node_colors.append(colors[number])
+		draw_graph(G, node_colors)
+
+def find_vertices_of_biggest_component(components: list):
+	'''Function finding numbers of vertices of the biggest component in graph 
+	defined by a components list
+
+	Arguments:
+		components {list} -- every element is a number of component for every node in graph G
+
+	Returns:
+		{list} -- vertices that are parts of the biggest component
+	'''
+	number_of_appearances = []
+	unique = set(components)
+	for i in unique:
+		number_of_appearances.append(components.count(i))
+	#choosing component that has max number of appearances
+	idx = number_of_appearances.index(max(number_of_appearances))
+	unique = list(unique) #set does not support indexing
+	positions = []
+	for i in range(len(components)):
+		if components[i] == unique[idx]:
+			positions.append(i)
+	return [x+1 for x in positions]
 
 ########################################################################
 
@@ -301,19 +320,17 @@ def drawGraph(G: np.array, components: list):
 
 def generateRandomizedKRegularGraph(L):
 	'''Function generating random k-regular graphs from graph sequence given as a list L
-
 	Arguments:
 		L {list} -- graph sequence
-
 	Returns:
 		List -- adjacency representation of randomized graph
 	'''
-    if(isDegreeSequence(L.copy())):
-        G = degSeq2adjMat(L.copy())
-        np.savetxt("task1.txt", G, delimiter=" ", newline = "\n", fmt="%d")
-    else: 
-        print("Number of vertices and degrees is invalid.")
-        exit(-1)
-    with open('task1.txt', 'r') as f:
-        Adjacency_matrix = [[int(num) for num in line.split()] for line in f]
-    return graph_randomization(Adjacency_matrix)
+	if(isDegreeSequence(L.copy())):
+		G = degSeq2adjMat(L.copy())
+		np.savetxt("task1.txt", G, delimiter=" ", newline = "\n", fmt="%d")
+	else: 
+		print("Number of vertices and degrees is invalid.")
+		exit(-1)
+	with open('task1.txt', 'r') as f:
+		Adjacency_matrix = [[int(num) for num in line.split()] for line in f]
+	return graph_randomization(Adjacency_matrix)
