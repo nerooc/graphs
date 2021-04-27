@@ -296,3 +296,24 @@ def drawGraph(G: np.array, components: list):
 	draw_graph(G, node_colors)
 
 ########################################################################
+
+#task 5 written by Piotr Matiaszewski 
+
+def generateRandomizedKRegularGraph(L):
+	'''Function generating random k-regular graphs from graph sequence given as a list L
+
+	Arguments:
+		L {list} -- graph sequence
+
+	Returns:
+		List -- adjacency representation of randomized graph
+	'''
+    if(isDegreeSequence(L.copy())):
+        G = degSeq2adjMat(L.copy())
+        np.savetxt("task1.txt", G, delimiter=" ", newline = "\n", fmt="%d")
+    else: 
+        print("Number of vertices and degrees is invalid.")
+        exit(-1)
+    with open('task1.txt', 'r') as f:
+        Adjacency_matrix = [[int(num) for num in line.split()] for line in f]
+    return graph_randomization(Adjacency_matrix)
