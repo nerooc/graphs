@@ -259,6 +259,7 @@ def display_graph(g):
 	nx.draw_networkx_edges(g,pos)
 	nx.draw_networkx_labels(g,pos)
 	plt.axis('square') # square plot provides the real circle shape of graph
+	plt.axis('off')
 	plt.show()
 
 def display_graph_coloured_sequences(g,node_colors_tab):
@@ -273,6 +274,7 @@ def display_graph_coloured_sequences(g,node_colors_tab):
 	nx.draw_networkx_edges(g,pos)
 	nx.draw_networkx_labels(g,pos)
 	plt.axis('square') # square plot provides the real circle shape of graph
+	plt.axis('off')
 	plt.show()
 
 def draw_graph(data_matrix,node_colors_tab=None):
