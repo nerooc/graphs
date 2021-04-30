@@ -214,7 +214,7 @@ def get_info_from_user():
 
 
 def draw_nodes(data_matrix):
-	'''Function creating a grahp from given adjacency matrix and positioning every node in correct position.
+	'''Function creating a graph from given adjacency matrix and positioning every node in correct position.
 
 	Arguments:
 		data_matrix {list} -- adjacency matrix representation of graph
@@ -255,7 +255,9 @@ def display_graph(g):
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 	'''
 	pos=nx.get_node_attributes(g,'pos')
-	nx.draw(g,pos,node_size=10000/len(pos),with_labels=True)
+	nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos))#empirycznie
+	nx.draw_networkx_edges(g,pos)
+	nx.draw_networkx_labels(g,pos)
 	plt.axis('square') # square plot provides the real circle shape of graph
 	plt.show()
 
@@ -267,7 +269,9 @@ def display_graph_coloured_sequences(g,node_colors_tab):
 		node_colors_tab {list} -- list containing color of every node   
 	'''
 	pos=nx.get_node_attributes(g,'pos')
-	nx.draw(g,pos,node_size=10000/len(pos),node_color=node_colors_tab,with_labels=True)
+	nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos),node_color=node_colors_tab)#empirycznie
+	nx.draw_networkx_edges(g,pos)
+	nx.draw_networkx_labels(g,pos)
 	plt.axis('square') # square plot provides the real circle shape of graph
 	plt.show()
 
