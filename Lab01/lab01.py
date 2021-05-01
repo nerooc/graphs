@@ -248,7 +248,7 @@ def display_graph(g):
 		node_number=node[0]
 		node_x_position=node[1]['pos'][0]
 		node_y_position=node[1]['pos'][1]
-		node_size=number_of_nodes*0.1
+		node_size=number_of_nodes*0.06
 		draw_circle = plt.Circle((node_x_position, node_y_position), node_size,zorder=2)
 		axes.add_patch(draw_circle)
 		label = axes.annotate(node_number, xy=(node_x_position, node_y_position),va="center", ha="center")
