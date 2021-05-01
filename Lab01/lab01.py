@@ -14,7 +14,6 @@ def read_graph_file_return_Adjacency_matrix(file_name, return_input_info=False):
 	   1 0 0                2  1               1 0
 	   1 0 0                3  1               0 1
 	   return_input_info - change output
-
 	  output (if return_input_info: a) else b) :
 	   a) [Adjacency matrix]
 	   b) [representation used in file, info which representation it is]
@@ -190,11 +189,9 @@ def convert_Adjacency_list_into_Incidence_matrix(data_matrix):
 
 def compute_node_coordinates(number_of_nodes,radius):
 	'''Function computing node coordinates from given number of nodes and graphical(visual) radius of one node in final picture.
-
 	Arguments:
 		number_of_nodes {int} -- number of nodes in the graph which position will be computed 
 		radius {integer or float} --  value determining the size of every node in the final picture
-
 	Returns:
 		list -- list containing nodes' coordinates
 	'''
@@ -202,23 +199,10 @@ def compute_node_coordinates(number_of_nodes,radius):
 	return coordinates
 
 
-def get_info_from_user():
-	'''Function asking user for name of the input file
-
-	Returns:
-		str -- string containing file name
-	'''
-	print("Welcome to graph builder. Please type the name of your file:")
-	file_name=input()
-	return (file_name)
-
-
 def draw_nodes(data_matrix):
 	'''Function creating a graph from given adjacency matrix and positioning every node in correct position.
-
 	Arguments:
 		data_matrix {list} -- adjacency matrix representation of graph
-
 	Returns:
 		graph {networkx.classes.graph.Graph} -- graph object with properly positioned nodes
 	'''
@@ -234,11 +218,9 @@ def draw_nodes(data_matrix):
 
 def draw_edges_from_adjacency_matrix(g,data_matrix): #we assume the matrix is symmetrical, what allows us to iterate through its half only
 	'''Function adding edges to graph g. Edges are read from adjacency matrix representation of the graph
-
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with nodes that are already set and positioned
 		data_matrix {list} -- adjacency matrix representation of graph
-
 	Returns:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 	'''
@@ -250,7 +232,6 @@ def draw_edges_from_adjacency_matrix(g,data_matrix): #we assume the matrix is sy
 
 def display_graph(g):
 	'''Function displaying graph to user
-
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 	'''
@@ -264,7 +245,6 @@ def display_graph(g):
 
 def display_graph_coloured_sequences(g,node_colors_tab):
 	'''Function displaying graph with colored nodes to user. 
-
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 		node_colors_tab {list} -- list containing color of every node   
@@ -274,12 +254,10 @@ def display_graph_coloured_sequences(g,node_colors_tab):
 	nx.draw_networkx_edges(g,pos)
 	nx.draw_networkx_labels(g,pos)
 	plt.axis('square') # square plot provides the real circle shape of graph
-	plt.axis('off')
 	plt.show()
 
 def draw_graph(data_matrix,node_colors_tab=None):
 	''' "Main" function calling other functions in order to draw graph. Depending on the second argument graph will have colored nodes or not
-
 	Arguments:
 		data_matrix {list} -- adjacency matrix representation of graph
 		node_colors_tab {list} -- list containing color of every node. If not provided, nodes will have default color   
@@ -298,11 +276,9 @@ def draw_graph(data_matrix,node_colors_tab=None):
 
 def generate_graph_a(num_of_vertices: int, num_of_edges: int):
 	'''Function generating random graph (number of edges version)
-
 	Arguments:
 		num_of_vertices {integer} -- number of vertices
 		num_of_edges {integer} -- number of edges
-
 	Returns:
 		numpy array -- incidence matrix representing graph
 	'''
@@ -341,11 +317,9 @@ def generate_graph_a(num_of_vertices: int, num_of_edges: int):
 
 def generate_graph_b(num_of_vertices: int, probability: float):
 	'''Function generating random graph (probability version)
-
 	Arguments:
 		num_of_vertices {integer} -- number of vertices
 		num_of_edges {integer} -- probability that an edge exists between two vertices
-
 	Returns:
 		numpy array -- adjacency matrix representing graph
 	'''
@@ -372,3 +346,4 @@ def generate_graph_b(num_of_vertices: int, probability: float):
 		print("Second argument is not valid (must be float in range [0, 1]")
 		exit(-1)
 	return G
+
