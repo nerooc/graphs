@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time #for task 2
 import random #for task 2
-from lab01 import draw_graph #for task 3
-from lab01 import convert_Adjacency_matrix_into_Adjacency_list #for task 2
-from lab01 import convert_Adjacency_list_into_Adjacency_matrix #for task 2
+from random2 import randint #for task 4
+from lab01 import * #for task 2, 3, 6
+
 
 # functions to task 1 written by Bartosz Rogowski
 def isDegreeSequence(List_org: list):
@@ -315,6 +315,72 @@ def find_vertices_of_biggest_component(components: list):
 	return [x+1 for x in positions]
 
 ########################################################################
+ 
+#task 4 written by Tomasz Gajda
+
+def is_consistent(deg_seq: list) -> bool:
+    '''Function checking if the graph presented by degree sequence is consistent
+
+	Arguments:
+		deg_seq {list} -- degree sequence in form of a degree list
+
+	Returns:
+		{bool} -- boolean stating if the graph is consistent
+	'''
+    return len(list(filter(lambda x: x == 0, deg_seq))) == 0
+
+def is_euler(deg_seq: list) -> bool:
+    '''Function checking if the graph is Eulerian by chcecking if the degrees are even
+    and the graph is consistent
+
+	Arguments:
+		deg_seq {list} -- degree sequence in form of a degree list
+
+	Returns:
+		{bool} -- boolean stating if the graph is Eulerian
+	'''
+    return is_consistent(deg_seq) and len(list(filter(lambda x: x > 0 and x % 2 == 1, deg_seq))) == 0
+
+def generate_eulerian(n: int) -> list:
+    '''Function generating Eulerian graph from requested number of vertices, 
+    returns graph in form of an adjacency matrix
+
+	Arguments:
+		n {int} -- vertices count
+
+	Returns:
+		{list} -- adjacency matrix of generated Eulerian graph
+	'''
+    while True:
+        deg_seq = [randint(1, n) for x in range(n)]
+        if(isDegreeSequence(deg_seq) and is_euler(deg_seq)):
+            return degSeq2adjMat(deg_seq).astype(int).tolist()
+
+
+def euler_cycle(graph: list) -> list:
+    '''Function finding Euler cycle using DFS 
+
+	Arguments:
+		graph {list} -- graph in form of an adjacency matrix
+
+	Returns:
+		{list} -- list presenting the Euler cycle by consecutive vertices
+	'''
+    cycle = []
+
+    def euler_dfs(v):
+        for u in range(len(graph)):
+            if graph[v][u] > 0:
+                graph[v][u] -= 1
+                graph[u][v] -= 1
+                euler_dfs(u)
+        cycle.append(v)
+
+    euler_dfs(0)
+
+    return [x+1 for x in cycle]
+
+########################################################################
 
 #task 5 written by Piotr Matiaszewski 
 
@@ -334,3 +400,92 @@ def generateRandomizedKRegularGraph(L):
 	with open('task1.txt', 'r') as f:
 		Adjacency_matrix = [[int(num) for num in line.split()] for line in f]
 	return graph_randomization(Adjacency_matrix)
+
+########################################################################
+ 
+#task 6 written by Tomasz Gajda
+ 
+def prepare_for_hamilton(file_name: str) -> tuple:
+    '''Function preparing graph represantation for hamilton cycle recursive function
+ 
+    Arguments:
+        file_name {str} -- name of the file with graph representation
+ 
+    Returns:
+        graphs {tuple} -- tuple holding one graph with original 
+        indexing and second prepared for the recursive algorithm
+    '''
+ 
+    graph_adj_mat = read_graph_file_return_Adjacency_matrix(file_name)
+    graph = convert_Adjacency_matrix_into_Adjacency_list(graph_adj_mat)
+ 
+    for i in range(len(graph)):
+        for j in range(len(graph[i])):
+            graph[i][j] -= 1
+ 
+    return (graph, graph_adj_mat)
+ 
+def hamilton_cycle(graph: list, v: int = 0, stack: list = None) -> list:
+    '''Function finding Hamilton cycle of the graph (if it exists)
+ 
+    Arguments:
+        graph {list} -- adjacency matrix of a graph
+        v {int} -- current vertex (0 by default)
+        stack {list} -- list of vertices forming current cycle
+ 
+    Returns:
+        hamilton_cycle {list} -- list of vertices forming Hamiltonian cycle (if it exists)
+    '''
+ 
+    if stack is None:
+        stack = []
+    
+    size = len(graph)
+ 
+    if v not in set(stack):
+        stack.append(v)
+ 
+        if len(stack) == size:
+            if stack[-1] in graph[stack[0]]:
+                stack.append(stack[0])
+                return [x+1 for x in stack]
+            else:
+                stack.pop()
+                return None
+ 
+        for v_n in graph[v]:
+            stack_copy = stack[:]
+            hamilton_result = hamilton_cycle(graph, v_n, stack_copy)
+            if hamilton_result is not None:
+                return hamilton_result
+ 
+def draw_hamilton(g_am: list, cycle: list):
+    """Function drawing a graph with the Hamilton cycle steps (if it exists)
+    Arguments:
+        g_am {list} -- adjacency matrix of a graph
+        cycle {list} -- Hamiltonian cycle
+    """
+    g = nx.Graph()
+    node_value = 1 
+    labels = {}
+    number_of_nodes = len(g_am)
+    coordinates=[(np.sin(np.pi * 2 * i / number_of_nodes) * number_of_nodes, np.cos(np.pi * 2 * i / number_of_nodes) * number_of_nodes) for i in range(number_of_nodes)]
+ 
+    for i in g_am:
+        node_label = str(node_value) + "(" + str(cycle.index(node_value) + 1) +")"
+        labels[node_value] = node_label
+        g.add_node(node_value, pos = coordinates[node_value - 1])
+        node_value += 1 
+ 
+    for i in range(len(g_am)):
+        for j in range(i + 1 , len(g_am)):
+            if(g_am[i][j] == 1):
+                g.add_edge(i + 1, j + 1)
+ 
+    pos = nx.get_node_attributes(g,'pos')
+    nx.draw(g, pos, node_size = 10000/len(pos), with_labels = False)
+    nx.draw_networkx_labels(g, pos, labels)
+    plt.axis('square')
+    plt.show()
+ 
+########################################################################
