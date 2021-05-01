@@ -316,7 +316,7 @@ def find_vertices_of_biggest_component(components: list):
 
 ########################################################################
  
-#task 4 written by Tomasz Gajda
+# task 4 written by Tomasz Gajda
 
 def is_consistent(deg_seq: list) -> bool:
     '''Function checking if the graph presented by degree sequence is consistent
@@ -403,7 +403,7 @@ def generateRandomizedKRegularGraph(L):
 
 ########################################################################
  
-#task 6 written by Tomasz Gajda
+# task 6 written by Tomasz Gajda
  
 def prepare_for_hamilton(file_name: str) -> tuple:
     '''Function preparing graph represantation for hamilton cycle recursive function

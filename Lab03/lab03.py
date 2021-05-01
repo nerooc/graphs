@@ -1,6 +1,6 @@
 from queue import PriorityQueue # for task 2
 
-#task 2 written by Tomasz Gajda
+# task 2 written by Tomasz Gajda
 
 def get_neighbours(graph: list, v: int) -> list:
     '''Function finding all neighbours to a given vertex and returning
@@ -94,12 +94,13 @@ def print_dijkstra(path_costs: list, predecessors: list, v_start: int):
     for v in range(rank):
         print("d({0}) = {1} ==> {2}". format(v, path_costs[v], str(get_path(predecessors, v_start, v))))
 
+########################################################################
 
-#task 3 written by Tomasz Gajda
+# task 3 written by Tomasz Gajda
 
 def distance_matrix(graph: list):
     '''Function printing out the distance matrix with distances between every pair of vertices
-    
+
     Arguments:
         graph {list} -- graph in form of an adjacency matrix
 	'''
@@ -110,4 +111,5 @@ def distance_matrix(graph: list):
     
     for row in distance_matrix:
         print(row)
-        
+
+########################################################################
