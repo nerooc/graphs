@@ -235,26 +235,43 @@ def display_graph(g):
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 	'''
-	pos=nx.get_node_attributes(g,'pos')
-	nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos))#empirycznie
-	nx.draw_networkx_edges(g,pos)
-	nx.draw_networkx_labels(g,pos)
-	plt.axis('square') # square plot provides the real circle shape of graph
+	nodes=g.nodes.data()
+	edges=g.edges.data()
+	number_of_nodes=len(nodes)
+	print("Graph will be displayed soon")
+	figure, axes = plt.subplots()
+	for edge in edges: #drawing edges
+		node1=nodes[edge[0]]['pos']
+		node2=nodes[edge[1]]['pos']
+		plt.plot([node1[0],node2[0]],[node1[1],node2[1]],marker='o',color='black',zorder=1)
+	for node in nodes: #drawing nodes
+		node_number=node[0]
+		node_x_position=node[1]['pos'][0]
+		node_y_position=node[1]['pos'][1]
+		node_size=number_of_nodes*0.1
+		draw_circle = plt.Circle((node_x_position, node_y_position), node_size,zorder=2)
+		axes.add_patch(draw_circle)
+		label = axes.annotate(node_number, xy=(node_x_position, node_y_position),va="center", ha="center")
+		axes.add_artist(draw_circle)
 	plt.axis('off')
+	plt.axis('square') # square plot provides the real circle shape of graph
+	plt.xlim([-1.2*number_of_nodes,1.2*number_of_nodes])
+	plt.ylim([-1.2*number_of_nodes,1.2*number_of_nodes])
 	plt.show()
 
-def display_graph_coloured_sequences(g,node_colors_tab):
-	'''Function displaying graph with colored nodes to user. 
+def display_graph_coloured_sequences(g,node_colors_tab): #used in next labs
+	'''Function displaying graph with colored nodes to user. It is all commented since it will be useful since lab2
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 		node_colors_tab {list} -- list containing color of every node   
 	'''
-	pos=nx.get_node_attributes(g,'pos')
-	nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos),node_color=node_colors_tab)#empirycznie
-	nx.draw_networkx_edges(g,pos)
-	nx.draw_networkx_labels(g,pos)
-	plt.axis('square') # square plot provides the real circle shape of graph
-	plt.show()
+	pass
+	#pos=nx.get_node_attributes(g,'pos')
+	#nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos),node_color=node_colors_tab)#empirycznie
+	#nx.draw_networkx_edges(g,pos)
+	#nx.draw_networkx_labels(g,pos)
+	#plt.axis('square') # square plot provides the real circle shape of graph
+	#plt.show()
 
 def draw_graph(data_matrix,node_colors_tab=None):
 	''' "Main" function calling other functions in order to draw graph. Depending on the second argument graph will have colored nodes or not
@@ -266,8 +283,8 @@ def draw_graph(data_matrix,node_colors_tab=None):
 	graph=draw_edges_from_adjacency_matrix(graph,data_matrix)
 	if node_colors_tab == None:
 		display_graph(graph)
-	else:
-		display_graph_coloured_sequences(graph,node_colors_tab)
+	#else: #else never happens in lab1, we do not want to color anything
+	#	display_graph_coloured_sequences(graph,node_colors_tab)
 
 ###############################################################################################
 
