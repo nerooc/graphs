@@ -14,7 +14,7 @@ if __name__ == '__main__':
 	mode = input("Please type mode: \n- 'a' if second argument will be number of edges\n- 'b' - if probability\n")
 	if mode == 'a':
 		number_of_vertices = input("Enter number of vertices: ")
-		number_of_edges = input("Enter number of edges or probability that an edge exists between two vertices: ")
+		number_of_edges = input("Enter number of edges: ")
 		try:
 			G = generate_graph_a(int(number_of_vertices), int(number_of_edges))
 		except ValueError:
@@ -22,7 +22,7 @@ if __name__ == '__main__':
 			exit(-1)
 	elif mode == 'b':
 		number_of_vertices = input("Enter number of vertices: ")
-		probability = input("Enter number of edges or probability that an edge exists between two vertices: ")
+		probability = input("Enter probability that an edge exists between two vertices: ")
 		try:
 			G = generate_graph_b(int(number_of_vertices), float(probability))
 		except ValueError:
