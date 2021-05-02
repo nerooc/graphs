@@ -1,10 +1,16 @@
 from lab01 import *
+import sys
 
 
 if __name__ == "__main__":
-    print("Welcome to graph decoder.\nType the name of your input file:")
-    file_name = input()
-    data_matrix, graph_rep_type = read_graph_file_return_Adjacency_matrix(file_name,True)
+    print("Welcome to graph decoder. Path to graph data file should be typed in input args.")
+    file_name = 'input.txt'
+    if len(sys.argv) == 1:
+        print("No input in program args, trying to open file \'input.txt\'...\n")
+    else:
+        file_name = sys.argv[1]  # path to file with graph data
+
+    data_matrix, graph_rep_type = read_graph_file_return_Adjacency_matrix(file_name, True)
 
     if graph_rep_type == "adjacency matrix":
         # input was Adjacency matrix
@@ -12,9 +18,9 @@ if __name__ == "__main__":
         adj_list = convert_Adjacency_matrix_into_Adjacency_list(data_matrix)
         print("Adjacency matrix -> Adjacency list:")
         for i in range(len(adj_list)):
-            print(i+1,end=". ")
+            print(i+1, end=". ")
             for j in range(len(adj_list[i])):
-                print(adj_list[i][j],end=" ")
+                print(adj_list[i][j], end=" ")
             print()
 
         print()
@@ -23,7 +29,7 @@ if __name__ == "__main__":
         print(*incidence_matrix, sep="\n")
         # draw graph
         graph = draw_nodes(data_matrix)
-        graph = draw_edges_from_adjacency_matrix(graph, data_matrix)
+        graph = draw_edges(graph, data_matrix)
         display_graph(graph)
 
     elif graph_rep_type == "adjacency list":
@@ -39,7 +45,7 @@ if __name__ == "__main__":
         print(*incidence_matrix,sep="\n")
         # draw graph
         graph = draw_nodes(adjacency_matrix)
-        graph = draw_edges_from_adjacency_matrix(graph, adjacency_matrix)
+        graph = draw_edges(graph, adjacency_matrix)
         display_graph(graph)
 
     elif graph_rep_type == "incidence matrix":    
@@ -58,5 +64,5 @@ if __name__ == "__main__":
             print()
         # draw graph
         graph = draw_nodes(adjacency_matrix)
-        graph = draw_edges_from_adjacency_matrix(graph, adjacency_matrix)
+        graph = draw_edges(graph, adjacency_matrix)
         display_graph(graph)
