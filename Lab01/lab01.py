@@ -100,8 +100,8 @@ def read_graph_file_return_Adjacency_matrix(file_name, return_input_info=False):
 
 
 	except FileNotFoundError:
-		print("Sorry, there is no file called '" + file_name + "'")
-		return []
+		print("\nSorry, there is no file called '" + file_name + "'\n")
+        	exit(-1)
 
 
 def remove_first(_list):  # used in read_graph
