@@ -4,6 +4,8 @@ First task revolves around different graph representations and their connection 
 
 The representations have to meet some requirements.
 
+### Program should be run with command `python3 task1.py path_to_file` 
+
 ### Requirements for Adjacency matrix input file:
 
 1. File should contain only rows with matrix (no enters before matrix and after).
@@ -54,8 +56,12 @@ Example:
 
 Program allows the user to draw/plot a graph based on any representation. The vertices of the graph are evenly distributed around a circle.
 
+### Program should be run with command `python3 task2.py path_to_file` 
+
 ![graph_pic](https://github.com/nerooc/graphs/blob/main/Lab01/Preview/graph_picture.png)
 
 ## Task 3 - Graph generator
+
+### Program should be run with command `python3 task3.py` 
 
 Program allows user to generate random graph based on number of vertices and number of edges or probability that between two vertices there exists an edge.
