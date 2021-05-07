@@ -12,8 +12,8 @@ from lab02 import isDegreeSequence, degSeq2adjMat, generate_eulerian, euler_cycl
 if __name__ == "__main__":
     print("Euler cycle - Please type the count of vertices you want:")
     n = int(input())
-    graph_adj_mat = generate_eulerian(n);
-    graph_adj_mat_cp = cp.deepcopy(graph_adj_mat);
+    graph_adj_mat = generate_eulerian(n)
+    graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
 
     result_cycle = euler_cycle(graph_adj_mat_cp)
     print(result_cycle)

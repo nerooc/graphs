@@ -1,9 +1,10 @@
 import random
 import time
-from pandas import *
+# from pandas import *
 from lab01 import read_graph_file_return_Adjacency_matrix
-from lab01 import generate_graph
+from lab01 import generate_graph_b
 from lab01 import draw_graph
+from lab02 import *
 
 if __name__ == "__main__":
     # # some tests
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     # print("start!")
     # for i in range(len(prop)):
     #     for j in range(len(ver)):
-    #         Adjacency_matrix = generate_graph(ver[j], prop[i])
+    #         Adjacency_matrix = generate_graph_b(ver[j], prop[i])
     #         start = time.time()
     #         Adjacency_matrix2 = graph_randomization(Adjacency_matrix)
     #         end = time.time()

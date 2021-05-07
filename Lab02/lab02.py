@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time #for task 2
 import random #for task 2
-from random2 import randint #for task 4
 from lab01 import * #for task 2, 3, 6
 
 
 # functions to task 1 written by Bartosz Rogowski
 def isDegreeSequence(List_org: list):
 	'''Function checking whether sequence in given argument is a degree sequence
+	
 	Arguments:
 		List_org {list} -- list that contains int values
 	Returns:
@@ -352,7 +352,7 @@ def generate_eulerian(n: int) -> list:
 		{list} -- adjacency matrix of generated Eulerian graph
 	'''
     while True:
-        deg_seq = [randint(1, n) for x in range(n)]
+        deg_seq = [random.randint(1, n) for x in range(n)]
         if(isDegreeSequence(deg_seq) and is_euler(deg_seq)):
             return degSeq2adjMat(deg_seq).astype(int).tolist()
 
