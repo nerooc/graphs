@@ -103,12 +103,12 @@ def distance_matrix(graph: list):
 		graph {list} -- graph in form of an adjacency matrix
 	'''
 	distance_matrix = []
+    
 	for v in range(9):
 		path_costs, _ = dijkstra(graph, v)
 		distance_matrix.append(path_costs)
 	
-	for row in distance_matrix:
-		print(row)
+	return distance_matrix
 
 ########################################################################
 

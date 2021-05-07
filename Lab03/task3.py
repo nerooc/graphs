@@ -19,4 +19,5 @@ if __name__ == "__main__":
             [0,  4,  2,  0,  0,  0,  0,  0,  0],
             [4,  0,  0,  0,  8,  0,  0,  0,  0]]
 
-    distance_matrix(graph)
+    for row in distance_matrix(graph):
+        print(row)
