@@ -384,21 +384,20 @@ def euler_cycle(graph: list) -> list:
 
 #task 5 written by Piotr Matiaszewski 
 
-def generateRandomizedKRegularGraph(L):
+def generateRandomizedKRegularGraph(L: list) -> list:
 	'''Function generating random k-regular graphs from graph sequence given as a list L
 	Arguments:
 		L {list} -- graph sequence
 	Returns:
 		List -- adjacency representation of randomized graph
 	'''
-	if(isDegreeSequence(L.copy())):
-		G = degSeq2adjMat(L.copy())
-		np.savetxt("task1.txt", G, delimiter=" ", newline = "\n", fmt="%d")
+	if(isDegreeSequence(L)):
+		G = degSeq2adjMat(L)
 	else: 
 		print("Number of vertices and degrees is invalid.")
 		exit(-1)
-	with open('task1.txt', 'r') as f:
-		Adjacency_matrix = [[int(num) for num in line.split()] for line in f]
+	Adjacency_matrix = G
+		
 	return graph_randomization(Adjacency_matrix)
 
 ########################################################################
