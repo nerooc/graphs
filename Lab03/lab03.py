@@ -3,6 +3,69 @@ import numpy as np #for task 5
 import networkx as nx #for task 5
 import matplotlib.pyplot as plt #for task 5
 
+#import for task 1
+import random
+from lab01 import generate_graph_b
+from lab02 import COMPONENTS
+from lab02 import find_vertices_of_biggest_component
+from lab02 import graph_randomization
+
+
+# task 1 written by Karol Szeliga
+
+#  cuts all vertex connections (sets all ones in row+col to zero)
+def zeros_vertex_degree(adjacency_matrix, v):
+    for j in range(len(adjacency_matrix[v])):
+        adjacency_matrix[v][j] = 0
+    for i in range(len(adjacency_matrix)):
+        adjacency_matrix[i][v] = 0
+    return adjacency_matrix
+
+
+def delete_empty_vertices(adjacency_matrix):
+    no_ones_in_row = True
+    i = 0
+    while i < len(adjacency_matrix):
+        for j in range(len(adjacency_matrix[i])):
+            if adjacency_matrix[i][j] == 1.0:
+                no_ones_in_row = False
+        if no_ones_in_row:
+            adjacency_matrix.pop(i)
+            for k in range(len(adjacency_matrix)):
+                adjacency_matrix[k].pop(i)
+            i -= 1
+        no_ones_in_row = True
+        i += 1
+    adjacency_matrix_without_empty_vertices = adjacency_matrix
+    return adjacency_matrix_without_empty_vertices
+
+
+def add_weights(adjacency_matrix, min_weight = 1, max_weight = 10):
+    for i in range(len(adjacency_matrix)):
+        for j in range(len(adjacency_matrix[i])):
+            if adjacency_matrix[i][j] == 1:
+                adjacency_matrix[i][j] = int(random.choice(range(min_weight, max_weight)))
+    adjacency_matrix_with_weights = adjacency_matrix
+    return adjacency_matrix_with_weights
+
+
+def generate_random_graph(max_vertex_num):
+    random_probability = random.uniform(0.0, 1.0)
+    adjacency_matrix = generate_graph_b(max_vertex_num, random_probability)
+    vertices_in_final_matrix = find_vertices_of_biggest_component(COMPONENTS(adjacency_matrix))
+    adjacency_matrix = adjacency_matrix.tolist()
+    if len(vertices_in_final_matrix) < 2:
+        return {1}
+    if len(vertices_in_final_matrix) < len(adjacency_matrix[0]):
+        for v in range(len(adjacency_matrix[0])):
+            if not vertices_in_final_matrix.__contains__(v+1):
+                adjacency_matrix = zeros_vertex_degree(adjacency_matrix, v)
+    component_adjacency_matrix = delete_empty_vertices(adjacency_matrix)
+    random_component_adjacency_matrix = graph_randomization(component_adjacency_matrix)
+    return random_component_adjacency_matrix
+
+########################################################################
+
 # task 2 written by Tomasz Gajda
 
 def get_neighbours(graph: list, v: int) -> list:
