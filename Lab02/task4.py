@@ -49,8 +49,8 @@ if __name__ == "__main__":
 
     n = int(sys.argv[1])
 
-    if n <= 2 or n >= 17:
-        raise Exception("Invalid number of vertices! Correct number is in the range 2 <= n <= 20")
+    if n < 3 or n > 16:
+        raise Exception("Invalid number of vertices! Correct number is in the range 3 <= n <= 16")
 
     graph_adj_mat = generate_eulerian(n)
     graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
