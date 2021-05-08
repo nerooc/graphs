@@ -80,7 +80,7 @@ def get_path(predecessors: list, v_start: int, v_end: int) -> list:
 	return path
 
 
-def print_dijkstra(path_costs: list, predecessors: list, v_start: int):
+def print_dijkstra(path_costs: list, predecessors: list, v_start: int) -> None:
 	'''Function printing out all the shortest paths (to all different vertices) and costs
 	Arguments:
 		path_costs {list} -- list of costs for each vertex in the graph
@@ -97,10 +97,12 @@ def print_dijkstra(path_costs: list, predecessors: list, v_start: int):
 
 # task 3 written by Tomasz Gajda
 
-def distance_matrix(graph: list):
+def distance_matrix(graph: list) -> list:
 	'''Function printing out the distance matrix with distances between every pair of vertices
 	Arguments:
 		graph {list} -- graph in form of an adjacency matrix
+    Returns:
+        distance_matrix {list} -- constructed distance matrix
 	'''
 	distance_matrix = []
     

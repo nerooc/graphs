@@ -4,14 +4,54 @@ Projekt 2, zadanie 4
 Script by Tomasz Gajda
 """
 
+import sys
 import copy as cp
 
 from lab01 import draw_graph
 from lab02 import isDegreeSequence, degSeq2adjMat, generate_eulerian, euler_cycle
 
 if __name__ == "__main__":
-    print("Euler cycle - Please type the count of vertices you want:")
-    n = int(input())
+    # TWO ARGUMENTS ARE REQUIRED
+    if len(sys.argv) != 2:
+        raise Exception("Run as: task4.py [number_of_vertices]")
+
+    #TESTING###########################################################################
+    if(sys.argv[1] == "test"):
+        print("TEST #1 - Test for minimal amount of vertices (3):")
+        graph_adj_mat = generate_eulerian(3)
+        graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
+        result_cycle = euler_cycle(graph_adj_mat_cp)
+        print(result_cycle)
+        draw_graph(graph_adj_mat)
+
+        print("TEST #2 - Test for maximal amount of vertices (16):")
+        graph_adj_mat = generate_eulerian(16)
+        graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
+        result_cycle = euler_cycle(graph_adj_mat_cp)
+        print(result_cycle)
+        draw_graph(graph_adj_mat)
+
+        print("TEST #3 - Test for a hardcoded matrix:")
+        graph_adj_mat = [[0, 1, 1, 1, 1, 0, 1, 1],
+                        [1, 0, 1, 1, 1, 1, 0, 1],
+                        [1, 1, 0, 1, 0, 1, 0, 0],
+                        [1, 1, 1, 0, 0, 0, 1, 0],
+                        [1, 1, 0, 0, 0, 0, 0, 0],
+                        [0, 1, 1, 0, 0, 0, 0, 0],
+                        [1, 0, 0, 1, 0, 0, 0, 0],
+                        [1, 1, 0, 0, 0, 0, 0, 0]]
+        graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
+        result_cycle = euler_cycle(graph_adj_mat_cp)
+        print(result_cycle)
+        draw_graph(graph_adj_mat)
+        sys.exit("End of testing")
+    #TESTING###########################################################################
+
+    n = int(sys.argv[1])
+
+    if n <= 2 or n >= 17:
+        raise Exception("Invalid number of vertices! Correct number is in the range 2 <= n <= 20")
+
     graph_adj_mat = generate_eulerian(n)
     graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
 
