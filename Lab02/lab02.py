@@ -1,7 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import time #for task 2
 import random #for task 2
 from lab01 import * #for task 2, 3, 6
 
@@ -43,161 +42,189 @@ def isDegreeSequence(List_org: list):
 # task 2 by Karol Szeliga
 
 def graph_randomization(adjacency_matrix):
-	"""
-	:param adjacency_matrix: 
-	:return: randomised adjacency_matrix
-	"""
-	## some explanation
-	# algorithm mixes edges in graph without changing vertex degrees
+    """
+    :param adjacency_matrix:
+    :return: randomised adjacency_matrix without changing vertices degrees
+    """
+    ## some explanation
+    # algorithm mixes edges in graph without changing vertex degrees
 
-	# using adjacency list it finds randomly 4 vertices (A,B,C,D) with:
-	# 1. edges between A-B and C-D
-	# 2. not edges between A..C and C..D
-	# When vertices are found edges are mixed:
-	# A-B C-D are swapped to A-C B-D
+    # using adjacency list it finds randomly 4 vertices (A,B,C,D) with:
+    # 1. edges between A-B and C-D
+    # 2. not edges between A..C and C..D
+    # When vertices are found edges are mixed:
+    # A-B C-D are swapped to A-C B-D
 
-	# algorithm repeats finding and swapping several times depend on size of the graph
-	
-	work_on_complement = False
-	if count_edges(adjacency_matrix) > int(full_graph_edges(len(adjacency_matrix))/2):
-		adjacency_matrix = graph_complement(adjacency_matrix)
-		work_on_complement = True
+    # algorithm repeats finding and swapping several times depend on size of the graph
 
-	adjacency_list = convert_Adjacency_matrix_into_Adjacency_list(adjacency_matrix)
+    work_on_complement = False
+    if count_edges(adjacency_matrix) > int(full_graph_edges(len(adjacency_matrix)) / 2):
+        adjacency_matrix = graph_complement(adjacency_matrix)
+        work_on_complement = True
 
-	all_selectable_ver = list(range(len(adjacency_list)))
-	for i in range(len(all_selectable_ver)):  # sort out empty and full vertices
-		if len(adjacency_list[i]) == 0 or len(adjacency_list[i]) == len(adjacency_list) - 1:
-			all_selectable_ver.remove(i)
-	# print("all selectable vertices -> ", all_selectable_ver)
+    adjacency_list = convert_Adjacency_matrix_into_Adjacency_list(adjacency_matrix)
 
-	# number of finding and swapping
-	mixes_number = random.choice(range(int(len(adjacency_list) / 2), int(len(adjacency_list))))
-	for i in range(mixes_number):
-		if len(all_selectable_ver) < 2:
-			print("[This graph cannot be randomise, return with no swap]")
-			break
-		edgesAllA = all_selectable_ver.copy()
-		foundAll = False
-		iverA, iverD, verB, verC = [0, 0, 0, 0]
-		graphImposibleToRand = False
-		foundA = False
-		while not foundA:
-			iverA = random.choice(edgesAllA)  # iterator for first 'A' vertex (iverA = i -> i+1 vertex)
-			edgesAllD = all_selectable_ver.copy()
-			edgesAllD.remove(iverA)
-			foundA = True
-			foundD = False
-			while not foundD:
-				iverD = random.choice(edgesAllD)  # iterator for second 'D' vertex  (iverD = i -> i+1 vertex)
-				if adjacency_list[iverA].__contains__(iverD + 1):  # if D-A then find another D
-					if len(edgesAllD) <= 1:
-						foundA = False
-						foundD = True  # fake, return and try to find another A
-					else:
-						edgesAllD.remove(iverD)
-				else:
-					foundD = True
-					edgesA = adjacency_list[iverA].copy()
-					foundB = False
-					while not foundB:
-						verB = random.choice(edgesA)  # vertex B
-						# B will never be D, because there is no A-D
-						edgesD = adjacency_list[iverD].copy()
-						if edgesD.__contains__(verB):
-							if len(edgesD) <= 1:
-								foundD = False
-								foundB = True  # fake, return and try to find D again
-								foundC = True  # fake, return and try to find D again
-							else:
-								edgesD.remove(verB)
-								foundB = True
-								foundC = False
-						else:
-							foundB = True
-							foundC = False
-						while not foundC:
-							verC = random.choice(edgesD)  # vertex C
-							if not adjacency_list[verC - 1].__contains__(verB):
-								foundC = True
-								foundAll = True  # if found C, then all vertices has correct edges
-							else:
-								if len(edgesD) <= 1:
-									foundB = False
-									foundC = True  # fake, return and try to find B and C again
-								else:
-									edgesD.remove(verC)  # try to find another C
-						if not foundB:
-							if len(edgesA) <= 1:
-								foundD = False
-								foundB = True  # fake, return and try to find D again
-							else:
-								edgesA.remove(verB)  # try to find another B
-					if not foundD:
-						if len(edgesAllD) <= 1:
-							foundA = False
-							foundD = True  # fake, return and try to find another A
-						else:
-							edgesAllD.remove(iverD)  # try to find another D
-				if not foundA:
-					if len(edgesAllA) <= 1:
-						foundA = True  # fake, this graph cannot be randomise!!!
-						graphImposibleToRand = True
-					else:
-						edgesAllA.remove(iverA)  # try to find another D
+    all_selectable_ver = list(range(len(adjacency_list)))
+    for i in range(len(all_selectable_ver)):  # sort out empty and full vertices
+        if len(adjacency_list[i]) == 0 or len(adjacency_list[i]) == len(adjacency_list) - 1:
+            all_selectable_ver.remove(i)
 
-		if graphImposibleToRand:
-			print("[This graph cannot be randomise, return with no swap]")
-			break
-		else:
-			# mixing
-			# print(iverA+1,"-X-", verB," ", verC,"-X-", iverD+1)
-			# print(iverA+1,"-", iverD+1," ", verC,"-", verB)
-			# print()
-			iAB = adjacency_list[iverA].index(verB)
-			adjacency_list[iverA][iAB] = iverD + 1
-			iDC = adjacency_list[iverD].index(verC)
-			adjacency_list[iverD][iDC] = iverA + 1
+    # number of finding and swapping
+    mixes_number = random.choice(range(int(len(adjacency_list) / 2), int(len(adjacency_list))))
+    for i in range(mixes_number):
+        if len(all_selectable_ver) < 2:
+            print("[This graph cannot be randomise, return with no swap]")
+            break
+        edgesAllA = all_selectable_ver.copy()
+        foundAll = False
+        iverA, iverD, verB, verC = [0, 0, 0, 0]
+        graphImposibleToRand = False
+        foundA = False
+        while not foundA:
+            iverA = random.choice(edgesAllA)  # iterator for first 'A' vertex (iverA = i -> i+1 vertex)
+            edgesAllD = all_selectable_ver.copy()
+            edgesAllD.remove(iverA)
+            foundA = True
+            foundD = False
+            while not foundD:
+                iverD = random.choice(edgesAllD)  # iterator for second 'D' vertex  (iverD = i -> i+1 vertex)
+                if adjacency_list[iverA].__contains__(iverD + 1):  # if D-A then find another D
+                    if len(edgesAllD) <= 1:
+                        foundA = False
+                        foundD = True  # fake, return and try to find another A
+                    else:
+                        edgesAllD.remove(iverD)
+                else:
+                    foundD = True
+                    edgesA = adjacency_list[iverA].copy()
+                    foundB = False
+                    while not foundB:
+                        verB = random.choice(edgesA)  # vertex B
+                        # B will never be D, because there is no A-D
+                        edgesD = adjacency_list[iverD].copy()
+                        if edgesD.__contains__(verB):
+                            if len(edgesD) <= 1:
+                                foundD = False
+                                foundB = True  # fake, return and try to find D again
+                                foundC = True  # fake, return and try to find D again
+                            else:
+                                edgesD.remove(verB)
+                                foundB = True
+                                foundC = False
+                        else:
+                            foundB = True
+                            foundC = False
+                        while not foundC:
+                            verC = random.choice(edgesD)  # vertex C
+                            if not adjacency_list[verC - 1].__contains__(verB):
+                                foundC = True
+                                foundAll = True  # if found C, then all vertices has correct edges
+                            else:
+                                if len(edgesD) <= 1:
+                                    foundB = False
+                                    foundC = True  # fake, return and try to find B and C again
+                                else:
+                                    edgesD.remove(verC)  # try to find another C
+                        if not foundB:
+                            if len(edgesA) <= 1:
+                                foundD = False
+                                foundB = True  # fake, return and try to find D again
+                            else:
+                                edgesA.remove(verB)  # try to find another B
+                    if not foundD:
+                        if len(edgesAllD) <= 1:
+                            foundA = False
+                            foundD = True  # fake, return and try to find another A
+                        else:
+                            edgesAllD.remove(iverD)  # try to find another D
+                if not foundA:
+                    if len(edgesAllA) <= 1:
+                        foundA = True  # fake, this graph cannot be randomise!!!
+                        graphImposibleToRand = True
+                    else:
+                        edgesAllA.remove(iverA)  # try to find another D
 
-			iBA = adjacency_list[verB - 1].index(iverA + 1)
-			adjacency_list[verB - 1][iBA] = verC
-			iCD = adjacency_list[verC - 1].index(iverD + 1)
-			adjacency_list[verC - 1][iCD] = verB
+        if graphImposibleToRand:
+            print("[This graph cannot be randomise, return with no swap]")
+            break
+        else:
+            # mixing
+            # print(iverA+1,"-X-", verB," ", verC,"-X-", iverD+1)
+            # print(iverA+1,"-", iverD+1," ", verC,"-", verB)
+            # print()
+            iAB = adjacency_list[iverA].index(verB)
+            adjacency_list[iverA][iAB] = iverD + 1
+            iDC = adjacency_list[iverD].index(verC)
+            adjacency_list[iverD][iDC] = iverA + 1
 
-	if work_on_complement:
-		return graph_complement(convert_Adjacency_list_into_Adjacency_matrix(adjacency_list))
-	else:
-		return convert_Adjacency_list_into_Adjacency_matrix(adjacency_list)
+            iBA = adjacency_list[verB - 1].index(iverA + 1)
+            adjacency_list[verB - 1][iBA] = verC
+            iCD = adjacency_list[verC - 1].index(iverD + 1)
+            adjacency_list[verC - 1][iCD] = verB
+
+    if work_on_complement:
+        return graph_complement(convert_Adjacency_list_into_Adjacency_matrix(adjacency_list))
+    else:
+        return convert_Adjacency_list_into_Adjacency_matrix(adjacency_list)
 
 
 def count_edges(adjacency_matrix):
-	count = 0
-	for i in range(len(adjacency_matrix) - 1):
-		for j in range(i + 1, len(adjacency_matrix)):
-			if adjacency_matrix[i][j] == 1:
-				count += 1
-	return count
+    count = 0
+    for i in range(len(adjacency_matrix) - 1):
+        for j in range(i + 1, len(adjacency_matrix)):
+            if adjacency_matrix[i][j] == 1:
+                count += 1
+    return count
 
 
 def set_opposite(cell):
-	if cell == 0:
-		return 1
-	else:
-		return 0
+    if cell == 0:
+        return 1
+    else:
+        return 0
 
 
 def graph_complement(adjacency_matrix):
-	complement_adjacency_matrix = [[set_opposite(cell) for cell in row] for row in adjacency_matrix]
-	for i in range(len(complement_adjacency_matrix)):
-		complement_adjacency_matrix[i][i] = 0
-	return complement_adjacency_matrix
+    complement_adjacency_matrix = [[set_opposite(cell) for cell in row] for row in adjacency_matrix]
+    for i in range(len(complement_adjacency_matrix)):
+        complement_adjacency_matrix[i][i] = 0
+    return complement_adjacency_matrix
 
 
 def full_graph_edges(length):
-	return length*(length-1)/2
+    return length * (length - 1) / 2
 
+
+def display_graphs(g1, g2, name1 = 'graph 1', name2 = 'graph 2'):
+    pos1 = nx.get_node_attributes(g1, 'pos')
+    pos2 = nx.get_node_attributes(g2, 'pos')
+    fig, axes = plt.subplots(1, 2)
+    ax = axes.flatten()
+    nx.draw(g1, pos1, node_size=10000/len(pos1), with_labels=True, ax=ax[0])
+    ax[0].set_title(name1)
+    ax[0].set_axis_off()
+    ax[0].axis('square')
+    nx.draw(g2, pos2, node_size=10000/len(pos2), with_labels=True, ax=ax[1])
+    ax[1].set_title(name2)
+    ax[1].set_axis_off()
+    ax[1].axis('square')
+    plt.show()
+
+
+def draw_two_graphs(data_matrix1, data_matrix2, name1 = 'graph 1', name2 = 'graph 2'):
+    ''' "Main" function calling other functions in order to draw graph. Depending on the second argument graph will have colored nodes or not
+    Arguments:
+        data_matrix {list} -- adjacency matrix representation of graph
+        node_colors_tab {list} -- list containing color of every node. If not provided, nodes will have default color
+    '''
+    graph1 = draw_nodes(data_matrix1)
+    graph1 = draw_edges_from_adjacency_matrix(graph1, data_matrix1)
+    graph2 = draw_nodes(data_matrix2)
+    graph2 = draw_edges_from_adjacency_matrix(graph2, data_matrix2)
+    display_graphs(graph1, graph2, name1, name2)
+	
+	
 ####################################################################################
-
 # functions to task 3 written by Bartosz Rogowski
 def degSeq2adjMat(List_org: list):
 	''' Function converting degree sequence to adjacency matrix.
