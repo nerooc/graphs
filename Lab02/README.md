@@ -28,14 +28,16 @@ The program allows user to find and display Eulerian cycle in a randomly generat
 
 `python3 task4.py [number-of-vertices]`
 
-Where `number-of-vertices` defines graph's size and should be a number within the range of **[3, 16]**. (Or more, depending on the hardware)
- 
+Where `number-of-vertices` defines graph's size as an **integer** and should be a number within the range of **[3, 60]**.
+
 ### 4.2 Testing
+
 `python3 task4.py test`
 
 The tests contain the function calls for:
+
 - **#1 - minimal (3)** number of vertices in the range, <br/>
-- **#2 - maximal (16)** number of vertices in the range, <br/>
+- **#2 - maximal (60)** number of vertices in the range, <br/>
 - **#3 - hardcoded matrix:**
 
 ```
