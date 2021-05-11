@@ -8,25 +8,41 @@ Script by Bartosz Rogowski
 '''
 
 import numpy as np
+import argparse
 from lab01 import generate_graph_a, generate_graph_b
 
+def parserFunction():
+	parser = argparse.ArgumentParser(description='')
+	parser.add_argument('-v', '--vertices', type=int, help=u'''Number of vertices''', required=True)
+	parser.add_argument('-e', '--edges', type=int, help=u'''Number of edges''')
+	parser.add_argument('-p', '--probability', type=float, help=u'''Probability that an edge exists between two vertices''')
+
+	args = parser.parse_args()
+	return args
+
 if __name__ == '__main__':
-	mode = input("Please type mode: \n- 'a' if second argument will be number of edges\n- 'b' - if probability\n")
-	if mode == 'a':
-		number_of_vertices = input("Enter number of vertices: ")
-		number_of_edges = input("Enter number of edges: ")
+	args = parserFunction()
+
+	if args.edges == None and args.probability == None:
+		print("No second argument provided")
+		exit(-1)
+	if args.edges != None:
 		try:
-			G = generate_graph_a(int(number_of_vertices), int(number_of_edges))
+			G = generate_graph_a(args.vertices, args.edges)
 		except ValueError:
 			print("Wrong arguments")
 			exit(-1)
-	elif mode == 'b':
-		number_of_vertices = input("Enter number of vertices: ")
-		probability = input("Enter probability that an edge exists between two vertices: ")
+		except Exception as e:
+			print(e)
+			exit(-1)
+	elif args.probability != None:
 		try:
-			G = generate_graph_b(int(number_of_vertices), float(probability))
+			G = generate_graph_b(args.vertices, args.probability)
 		except ValueError:
 			print("Wrong arguments")
+			exit(-1)
+		except Exception as e:
+			print(e)
 			exit(-1)
 	else:
 		print("Incorrect mode, please try again.")
