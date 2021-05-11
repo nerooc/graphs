@@ -6,10 +6,16 @@ if __name__ == "__main__":
     if len(sys.argv) > 3:
         print('You have specified too many arguments')
         sys.exit()
-
-    if len(sys.argv) < 3 and sys.argv[1]!='test':
+    
+    if len(sys.argv)==1:
         print('You did not specify enough arguments')
         sys.exit()
+
+    if len(sys.argv) < 3:
+        if len(sys.argv)==2:
+            if sys.argv[1]!='test':
+                print('You did not specify enough arguments')
+                sys.exit()
     
     #TESTING###########################################################################
     if sys.argv[1]=='test' and len(sys.argv)==2:
