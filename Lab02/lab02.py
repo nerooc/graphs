@@ -421,10 +421,8 @@ def generateRandomizedKRegularGraph(L: list) -> list:
 	if(isDegreeSequence(L)):
 		G = degSeq2adjMat(L)
 	else: 
-		print("Number of vertices and degrees is invalid.")
-		exit(-1)
+		raise Exception("Invalid numer of vertices and degrees.")
 	Adjacency_matrix = G
-		
 	return graph_randomization(Adjacency_matrix)
 
 ########################################################################

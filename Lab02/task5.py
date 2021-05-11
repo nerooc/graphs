@@ -17,10 +17,10 @@ if __name__ == "__main__":
     else:
         try:
             number_of_vertices,degree_of_vertices=int(input_list[0]),int(input_list[1])
-            graph_sequence=[degree_of_vertices for i in range(number_of_vertices)]
+            graph_sequence=[degree_of_vertices for i in range(number_of_vertices)] #we create degree sequence by adding to it degree of vertices n times, where n is the number of vertices
             randomized_graph=generateRandomizedKRegularGraph(graph_sequence)
-            draw_graph(randomized_graph)
-        except ValueError as e:
-            print("Invalid input form, error message: " + str(e))
+            draw_graph(randomized_graph) #graph should be random
+        except ValueError as e: #e.g. if user runs the program with args that are float and int
+            print("Invalid input form, enter 2 ints next time, error message: " + str(e))
         except Exception as e:
             print("Sorry, an error occured, error message: " + str(e))
