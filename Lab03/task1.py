@@ -8,7 +8,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("No input in program args, max_vertices_num = 9")
     else:
-        max_vertices_num = sys.argv[1]  # path to file with graph data
+        max_vertices_num = int(sys.argv[1])
     # max_vertices_num = 4
     adjacency_matrix1 = generate_random_graph(max_vertices_num)
     draw_two_graphs(adjacency_matrix1, generate_random_graph(max_vertices_num))
