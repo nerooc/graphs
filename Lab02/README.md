@@ -50,8 +50,25 @@ The tests contain the function calls for:
 ```
 
 ## Task 5 - *k*-regular Graph Generator
+About:
+ The program allows user to generate random *k*-regular graph.
+ 
+### 5.1 How to run the program
 
-The program allows user to generate random *k*-regular graph.
+`python3 task5.py [number-of-vertices] [degree-of-every-vertex]`
+Where `number-of-vertices` defines graph's size and `degree-of-every-vertex` specifies degree of every vertex in a graph (since graph is regular, degrees will be equal)
+
+### 5.2 Testing
+`python3 task5.py test`
+
+The tests contain the function calls for:
+
+- **#1** - Simple case of a graph with 5 vertices and degree of every vertex equal 2;
+- **#2** - Case of a graph with 5 vertices and degree of every vertex equal 4 (that graph cannot be randomised);
+- **#3** - Case of a graph with 5 vertices and degree of every vertex equal 5 (such a graph cannot be created, max degree = `x-1` where `x` is the number of vertices);
+- **#4** - Case of a graph with 5 vertices and degree of every vertex equal 'd' (wrong type of the second arg (should be: int, provided: float));
+
+
 
 ## Task 6 - Hamiltonian Cycle
 
