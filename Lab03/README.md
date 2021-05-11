@@ -22,15 +22,23 @@ Where `start-vertex` defines the number of the vertex for which we will find the
 `python3 task2.py test`
 
 The tests contain the function calls for:
-- **#1 - First vertex** of the given matrix, <br/>
-- **#2 - Last vertex** of the given matrix, <br/>
+- **#1 - First vertex** of a hardcoded matrix, <br/>
+- **#2 - Last vertex** of a hardcoded matrix, <br/>
 ## Task 3 - Distance matrix
 The program allows user to generate distance matrix containing distances between each pair of vertices on the graph.
 
 ### 3.1 How to run the program
 
-`python3 task3.py`
+`python3 task3.py [max-vertex-num]`
 
+Where `max-vertex-num` defines the max number (**int**) of vertices that the generated graph (for which we will create the distance matrix) should have. 
+
+### 3.2 Testing
+`python3 task2.py test`
+
+The tests contain the function calls for:
+- **#1** - Generated graph of max 5 vertices, <br/>
+- **#2** - Generated graph of max 30 vertices, <br/>
 
 ## Task 4 - Graph center
 
