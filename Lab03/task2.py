@@ -26,7 +26,6 @@ if __name__ == "__main__":
             [4,  0,  0,  0,  8,  0,  0,  0,  0]]
 
     #TESTING###########################################################################
-    #tests will be updated with task 1 finished
     if(sys.argv[1] == "test"):
         print("\nTEST #1 - Test for first vertex of the graph:\n")
         path_costs, predecessors = dijkstra(graph, 0)
