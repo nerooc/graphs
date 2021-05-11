@@ -3,7 +3,7 @@ import sys
 
 
 if __name__ == "__main__":
-    print("Welcome to graph decoder. Path to graph data file should be typed in input args.")
+    print("Welcome to graph decoder. Path to graph data file should be typed in input args")
     file_name = 'input.txt'
     if len(sys.argv) == 1:
         print("No input in program args, trying to open file \'input.txt\'...\n")
@@ -27,10 +27,8 @@ if __name__ == "__main__":
         print("Adjacency matrix -> Incidence matrix:")
         incidence_matrix = convert_Adjacency_matrix_into_Incidence_matrix(data_matrix)
         print(*incidence_matrix, sep="\n")
-        # draw graph
-        graph = draw_nodes(data_matrix)
-        graph = draw_edges(graph, data_matrix)
-        display_graph(graph)
+        
+        graph = draw_graph(adjacency_matrix)
 
     elif graph_rep_type == "adjacency list":
         # input was Adjacency list
@@ -43,10 +41,8 @@ if __name__ == "__main__":
         print()
         print("Adjacency list -> Incidence matrix:")
         print(*incidence_matrix,sep="\n")
-        # draw graph
-        graph = draw_nodes(adjacency_matrix)
-        graph = draw_edges(graph, adjacency_matrix)
-        display_graph(graph)
+        
+        graph = draw_graph(adjacency_matrix)
 
     elif graph_rep_type == "incidence matrix":    
         # input was Incidence matrix
@@ -62,7 +58,6 @@ if __name__ == "__main__":
             for j in range(len(adj_list[i])):
                 print(adj_list[i][j],end=" ")
             print()
-        # draw graph
-        graph = draw_nodes(adjacency_matrix)
-        graph = draw_edges(graph, adjacency_matrix)
-        display_graph(graph)
+        
+        draw_graph(adjacency_matrix)
+
