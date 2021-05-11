@@ -258,19 +258,19 @@ def display_graph(g):
 	plt.ylim([-1.2*number_of_nodes,1.2*number_of_nodes])
 	plt.show()
 
-def display_graph_coloured_sequences(g,node_colors_tab):
-	'''Function displaying graph with colored nodes to user.
+def display_graph_coloured_sequences(g,node_colors_tab): #used in next labs
+	'''Function displaying graph with colored nodes to user. It is all commented since it will be useful since lab2
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
 		node_colors_tab {list} -- list containing color of every node   
 	'''
-
-	pos=nx.get_node_attributes(g,'pos')
-	nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos),node_color=node_colors_tab)#empirycznie
-	nx.draw_networkx_edges(g,pos)
-	nx.draw_networkx_labels(g,pos)
-	plt.axis('square') # square plot provides the real circle shape of graph
-	plt.show()
+	pass
+	#pos=nx.get_node_attributes(g,'pos')
+	#nx.draw_networkx_nodes(g,pos,node_size=10000/len(pos),node_color=node_colors_tab)#empirycznie
+	#nx.draw_networkx_edges(g,pos)
+	#nx.draw_networkx_labels(g,pos)
+	#plt.axis('square') # square plot provides the real circle shape of graph
+	#plt.show()
 
 def draw_graph(data_matrix,node_colors_tab=None):
 	''' "Main" function calling other functions in order to draw graph. Depending on the second argument graph will have colored nodes or not
@@ -282,8 +282,8 @@ def draw_graph(data_matrix,node_colors_tab=None):
 	graph=draw_edges_from_adjacency_matrix(graph,data_matrix)
 	if node_colors_tab == None:
 		display_graph(graph)
-	else:
-		display_graph_coloured_sequences(graph,node_colors_tab)
+	#else: #else never happens in lab1, we do not want to color anything
+	#	display_graph_coloured_sequences(graph,node_colors_tab)
 
 ###############################################################################################
 
@@ -302,8 +302,7 @@ def generate_graph_a(num_of_vertices: int, num_of_edges: int):
 	if num_of_edges >= 0:
 		max_number_of_edges = int(num_of_vertices*(num_of_vertices-1)/2)
 		if(num_of_edges > max_number_of_edges):
-			print(f"Number of edges is greater than max value ({max_number_of_edges})")
-			exit(-1)
+			raise Exception(f"Number of edges is greater than max value ({max_number_of_edges})")
 		G = np.zeros((num_of_vertices, num_of_edges))
 		pairing_set = set() #contains pairs of vertices between which edge already exists
 		for edge in range(0, num_of_edges):
@@ -322,13 +321,11 @@ def generate_graph_a(num_of_vertices: int, num_of_edges: int):
 					pairing_set.add(vertex)
 					pairing_set.add(vertex[::-1])
 			except ValueError:
-				print("Number of vertices is too small")
-				exit(-1)
+				raise Exception("Number of vertices is too small")
 			for i in range(0, 2):
 				G[vertex[i], edge] += 1
 	else:
-		print("Second argument is not valid (must be positive integer")
-		exit(-1)
+		raise Exception("Second argument is not valid (must be positive integer)")
 	return G
 
 def generate_graph_b(num_of_vertices: int, probability: float):
@@ -356,10 +353,8 @@ def generate_graph_b(num_of_vertices: int, probability: float):
 			for b in range(0, num_of_vertices):
 				if G[a, b] == 1:
 					count += 1
-		print(f"{100*count/(num_of_vertices**2 - num_of_vertices)}%")
 
 	else:
-		print("Second argument is not valid (must be float in range [0, 1]")
-		exit(-1)
+		raise Exception("Second argument is not valid (must be float in range [0, 1])")
 	return G
 
