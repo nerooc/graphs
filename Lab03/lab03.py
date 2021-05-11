@@ -3,17 +3,15 @@ import numpy as np #for task 5
 import networkx as nx #for task 5
 import matplotlib.pyplot as plt #for task 5
 
-#import for task 1
+# import for task 1
 import random
 from lab01 import generate_graph_b
-from lab02 import COMPONENTS
-from lab02 import find_vertices_of_biggest_component
-from lab02 import graph_randomization
+from lab02 import COMPONENTS, find_vertices_of_biggest_component, graph_randomization
 
 
 # task 1 written by Karol Szeliga
 
-#  cuts all vertex connections (sets all ones in row+col to zero)
+#  cuts all connections of vertex v (sets all ones in row/col to zero)
 def zeros_vertex_degree(adjacency_matrix, v):
     for j in range(len(adjacency_matrix[v])):
         adjacency_matrix[v][j] = 0
@@ -40,11 +38,16 @@ def delete_empty_vertices(adjacency_matrix):
     return adjacency_matrix_without_empty_vertices
 
 
-def add_weights(adjacency_matrix, min_weight = 1, max_weight = 10):
+def add_int_weights(adjacency_matrix, min_int_weight=1, max_int_weight=10):
     for i in range(len(adjacency_matrix)):
-        for j in range(len(adjacency_matrix[i])):
+        for j in range(i, len(adjacency_matrix[i])):
             if adjacency_matrix[i][j] == 1:
-                adjacency_matrix[i][j] = int(random.choice(range(min_weight, max_weight)))
+                adjacency_matrix[i][j] = int(random.choice(range(min_int_weight, max_int_weight)))
+            else:
+                adjacency_matrix[i][j] = int(0)
+    for i in range(len(adjacency_matrix)):
+        for j in range(i):
+            adjacency_matrix[i][j] = adjacency_matrix[j][i]
     adjacency_matrix_with_weights = adjacency_matrix
     return adjacency_matrix_with_weights
 
