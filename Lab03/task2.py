@@ -15,32 +15,46 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         raise Exception("Run as: task2.py [v_start]")
 
+    graph = [[0,  3,  0,  2,  0,  0,  0,  0,  4],   
+            [3,  0,  0,  0,  0,  0,  0,  4,  0],
+            [0,  0,  0,  6,  0,  1,  0,  2,  0],
+            [2,  0,  6,  0,  1,  0,  0,  0,  0],
+            [0,  0,  0,  1,  0,  0,  0,  0,  8],
+            [0,  0,  1,  0,  0,  0,  8,  0,  0],
+            [0,  0,  0,  0,  0,  8,  0,  0,  0],
+            [0,  4,  2,  0,  0,  0,  0,  0,  0],
+            [4,  0,  0,  0,  8,  0,  0,  0,  0]]
+
+    #TESTING###########################################################################
+    #tests will be updated with task 1 finished
+    if(sys.argv[1] == "test"):
+        print("\nTEST #1 - Test for first vertex of the graph:\n")
+        path_costs, predecessors = dijkstra(graph, 0)
+        print_dijkstra(path_costs, predecessors, 0)
+        print("\nTEST #2 - Test for last vertex of the graph:\n")
+        path_costs, predecessors = dijkstra(graph, 8)
+        print_dijkstra(path_costs, predecessors, 8)
+        sys.exit("End of testing")
+    #TESTING###########################################################################
+
     v_start = int(sys.argv[1])
     min_vertices = v_start
 
-    # if we are looking for a path for the first vertex, let's give it a chance to generate a bigger graph
+    #if we are looking for a path for the first vertex, let's give it a chance to generate a bigger graph
     if min_vertices < 6:
         min_vertices = 6 
 
-    # graph generation
+    #graph generation
     graph = generate_random_graph(min_vertices)
 
-    while len(graph) <= v_start:
-        graph = generate_random_graph(min_vertices)
+    while len(graph) < v_start + 1:
+        graph = generate_random_graph(min_vertices + 5)
 
     weightless_graph = cp.deepcopy(graph)
     graph = add_int_weights(graph)
+    print(graph)
 
-    #TESTING###########################################################################
-    if(sys.argv[1] == "test"):
-        print("\nTEST #1 - Test for first vertex of the graph:\n")
-        path_costs, predecessors = dijkstra(graph, 1)
-        print_dijkstra(path_costs, predecessors, 1)
-        print("\nTEST #2 - Test for last vertex of the graph:\n")
-        path_costs, predecessors = dijkstra(graph, 1)
-        print_dijkstra(path_costs, predecessors, 1)
-        sys.exit("End of testing")
-    #TESTING###########################################################################
+    
 
 
     path_costs, predecessors = dijkstra(graph, v_start)
