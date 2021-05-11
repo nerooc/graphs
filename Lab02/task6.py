@@ -13,13 +13,13 @@ if __name__ == "__main__":
 
     #TESTING###########################################################################
     if(sys.argv[1] == "test"):
-        print("TEST #1 - Test for Hamiltonian graph")
+        print("\nTEST #1 - Test for Hamiltonian graph")
         graph, graph_adj_mat = prepare_for_hamilton("InputFiles/hamilton_adj_mat.txt")
         result_cycle = hamilton_cycle(graph)
         print("Hamiltonian cycle: " + str(result_cycle))
         draw_hamilton(graph_adj_mat, result_cycle)
         
-        print("TEST #2 - Test for non-Hamiltonian graph")
+        print("\nTEST #2 - Test for non-Hamiltonian graph")
         graph, graph_adj_mat = prepare_for_hamilton("InputFiles/non_hamilton.txt")
         result_cycle = hamilton_cycle(graph)
 

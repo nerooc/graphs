@@ -172,7 +172,7 @@ def distance_matrix(graph: list) -> list:
 	'''
 	distance_matrix = []
     
-	for v in range(9):
+	for v in range(len(graph)):
 		path_costs, _ = dijkstra(graph, v)
 		distance_matrix.append(path_costs)
 	

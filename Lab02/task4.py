@@ -17,21 +17,21 @@ if __name__ == "__main__":
 
     #TESTING###########################################################################
     if(sys.argv[1] == "test"):
-        print("TEST #1 - Test for minimal amount of vertices (3):")
+        print("\nTEST #1 - Test for minimal amount of vertices (3):")
         graph_adj_mat = generate_eulerian(3)
         graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
         result_cycle = euler_cycle(graph_adj_mat_cp)
         print(result_cycle)
         draw_graph(graph_adj_mat)
 
-        print("TEST #2 - Test for maximal amount of vertices (16):")
-        graph_adj_mat = generate_eulerian(16)
+        print("\nTEST #2 - Test for maximal amount of vertices (16):")
+        graph_adj_mat = generate_eulerian(60)
         graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)
         result_cycle = euler_cycle(graph_adj_mat_cp)
         print(result_cycle)
         draw_graph(graph_adj_mat)
 
-        print("TEST #3 - Test for a hardcoded matrix:")
+        print("\nTEST #3 - Test for a hardcoded matrix:")
         graph_adj_mat = [[0, 1, 1, 1, 1, 0, 1, 1],
                         [1, 0, 1, 1, 1, 1, 0, 1],
                         [1, 1, 0, 1, 0, 1, 0, 0],
@@ -49,8 +49,8 @@ if __name__ == "__main__":
 
     n = int(sys.argv[1])
 
-    if n < 3 or n > 16:
-        raise Exception("Invalid number of vertices! Correct number is in the range 3 <= n <= 16")
+    if n < 3 or n > 60:
+        raise Exception("Invalid number of vertices! Correct number is in the range 3 <= n <= 60")
 
     graph_adj_mat = generate_eulerian(n)
     graph_adj_mat_cp = cp.deepcopy(graph_adj_mat)

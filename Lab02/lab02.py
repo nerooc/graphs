@@ -354,7 +354,12 @@ def is_consistent(deg_seq: list) -> bool:
 	Returns:
 		{bool} -- boolean stating if the graph is consistent
 	'''
-    return len(list(filter(lambda x: x == 0, deg_seq))) == 0
+
+    def is_zero(el):
+        return el == 0
+    
+    return len(list(filter(is_zero, deg_seq))) == 0
+
 
 def is_euler(deg_seq: list) -> bool:
     '''Function checking if the graph is Eulerian by chcecking if the degrees are even
@@ -366,7 +371,10 @@ def is_euler(deg_seq: list) -> bool:
 	Returns:
 		{bool} -- boolean stating if the graph is Eulerian
 	'''
-    return is_consistent(deg_seq) and len(list(filter(lambda x: x > 0 and x % 2 == 1, deg_seq))) == 0
+    def is_odd(el):
+        return el % 2 == 1
+
+    return is_consistent(deg_seq) and len(list(filter(is_odd, deg_seq))) == 0
 
 def generate_eulerian(n: int) -> list:
     '''Function generating Eulerian graph from requested number of vertices, 
@@ -379,7 +387,7 @@ def generate_eulerian(n: int) -> list:
 		{list} -- adjacency matrix of generated Eulerian graph
 	'''
     while True:
-        deg_seq = [random.randint(1, n) for x in range(n)]
+        deg_seq = [random.randint(1, int(n/2)) * 2 for x in range(n)]
         if(isDegreeSequence(deg_seq) and is_euler(deg_seq)):
             return degSeq2adjMat(deg_seq).astype(int).tolist()
 
