@@ -62,6 +62,17 @@ Program allows the user to draw/plot a graph based on any representation. The ve
 
 ## Task 3 - Graph generator
 
-### Program should be run with command `python3 task3.py` 
+### Program should be run with command `python3 task3.py [-h] -v VERTICES [-e EDGES] [-p PROBABILITY]` 
+
+```
+arguments:
+  -h, --help            show this help message and exit
+  -v VERTICES, --vertices VERTICES
+                        Number of vertices
+  -e EDGES, --edges EDGES
+                        Number of edges
+  -p PROBABILITY, --probability PROBABILITY
+                        Probability that an edge exists between two vertices
+```
 
 Program allows user to generate random graph based on number of vertices and number of edges or probability that between two vertices there exists an edge.
