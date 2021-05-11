@@ -58,7 +58,7 @@ About:
 `python3 task5.py [number-of-vertices] [degree-of-every-vertex]`
 Where `number-of-vertices` defines graph's size and `degree-of-every-vertex` specifies degree of every vertex in a graph (since graph is regular, degrees will be equal)
 
-### 6.2 Testing
+### 5.2 Testing
 `python3 task5.py test`
 
 The tests contain the function calls for:
