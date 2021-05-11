@@ -54,9 +54,6 @@ if __name__ == "__main__":
     graph = add_int_weights(graph)
     print(graph)
 
-    
-
-
     path_costs, predecessors = dijkstra(graph, v_start)
     print_dijkstra(path_costs, predecessors, v_start)
     draw_graph(weightless_graph)
