@@ -1,7 +1,7 @@
 from lab03 import *
+import sys
 
-#this file is total mess, needs to discuss input type of data, but on distance matrices algorithm from lab03 works perfectly.
-
+### matrices for testing purposes
 matrix=[
 [0, 6, 11, 8, 3, 7, 5],
 [6, 0, 12, 2, 4, 8, 1],
@@ -26,13 +26,58 @@ matrix_2=[[0,3,2,5,7,10,8,9,12,13,14,17],
 [17,14,16,13,10,7,10,8,5,5,3,0]]
 
 if __name__ == "__main__": 
-    print("Centrum = "
-        +str(get_graph_centre_from_distance_matrix(matrix_2)[0])
-        +" (Suma odległości = "+
-        str(get_graph_centre_from_distance_matrix(matrix_2)[1])+").")
+    if len(sys.argv)==2:
+        if sys.argv[1]=='test':
+            print("-----TEST MODE - TEST 1-----\n")
+            print("Performing test for distance matrix:\n")
+            for row in matrix:
+                print(row)
+            print("\nCenter = "
+                +str(get_graph_centre_from_distance_matrix(matrix)[0])
+                +" (Distances sum = "+
+                str(get_graph_centre_from_distance_matrix(matrix)[1])+").")
 
-    print("Centrum minimax = ",end="")
-    print(get_minimax_centre_from_distance_matrix(matrix_2)[0],end="")
-    print(" (odległość od najdalszego: ",end="")
-    print(get_minimax_centre_from_distance_matrix(matrix_2)[1],end="")
-    print(")")
+            print("\n Minimax center= ",end="")
+            print(get_minimax_centre_from_distance_matrix(matrix)[0],end="")
+            print(" (Distance from the farthest: ",end="")
+            print(get_minimax_centre_from_distance_matrix(matrix)[1],end="")
+            print(")\n")
+            print("-----TEST 2-----\n")
+            print("Performing test for distance matrix:\n")
+            for row in matrix_2:
+                print(row)
+            print("\nCenter = "
+                +str(get_graph_centre_from_distance_matrix(matrix_2)[0])
+                +" (Distances sum = "+
+                str(get_graph_centre_from_distance_matrix(matrix_2)[1])+").")
+
+            print("\n Minimax center = ",end="")
+            print(get_minimax_centre_from_distance_matrix(matrix_2)[0],end="")
+            print(" (Distance from the farthest: ",end="")
+            print(get_minimax_centre_from_distance_matrix(matrix_2)[1],end="")
+            print(")\n")
+        else:
+            print("The only valid second arg is 'test'")
+    elif len(sys.argv)==1:
+        graph=generate_random_graph(10)
+        graph = add_int_weights(graph)
+        print("For provided input (matrix below):\n\n")
+        for row in graph:
+            print(row)
+        print("\n\nComputed distance matrix: \n\n")
+        distance_matrix_=distance_matrix(graph)
+        for row in distance_matrix_:
+            print(row)
+        print("\nCenter = "
+                +str(get_graph_centre_from_distance_matrix(distance_matrix_)[0])
+                +" (Distances sum = "+
+                str(get_graph_centre_from_distance_matrix(distance_matrix_)[1])+").")
+
+        print("\n Minimax center = ",end="")
+        print(get_minimax_centre_from_distance_matrix(distance_matrix_)[0],end="")
+        print(" (Distance from the farthest: ",end="")
+        print(get_minimax_centre_from_distance_matrix(distance_matrix_)[1],end="")
+        print(")\n")
+        
+    else:
+        print("You must provide 1 or 2 arguments.")
