@@ -10,9 +10,9 @@ def read_graph_file_return_Adjacency_matrix(file_name, return_input_info=False):
     """input:
        file_name - file with correct representation of graph, for example:
        Adjacency matrix:    Adjacency list:    Incidence matrix:
-       0 1 1                1  2 3             1 1
-       1 0 0                2  1               1 0
-       1 0 0                3  1               0 1
+       0 1 1                1.  2 3            1 1
+       1 0 0                2.  1              1 0
+       1 0 0                3.  1              0 1
        return_input_info - change output
       output (if return_input_info: a) else b) :
        a) [Adjacency matrix]
@@ -31,9 +31,6 @@ def read_graph_file_return_Adjacency_matrix(file_name, return_input_info=False):
                 for i in row:
                     if i not in [0, 1]:
                         itIsList = True
-                        # f.seek(0)
-                        # file_data2 = [[int(num) for num in remove_first(line.split())] for line in
-                        #               f]  # first int is number of vertex, must be removed
                         if return_input_info:
                             return file_data, "adjacency list"
                         else:
