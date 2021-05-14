@@ -13,51 +13,48 @@ if __name__ == "__main__":
     data_matrix, graph_rep_type = read_graph_file_return_Adjacency_matrix(file_name, True)
 
     if graph_rep_type == "adjacency matrix":
-        # input was Adjacency matrix
         print()
-        adj_list = convert_Adjacency_matrix_into_Adjacency_list(data_matrix)
+        print("input is Adjacency matrix:")
+        print_matrix(data_matrix)
+        print()
         print("Adjacency matrix -> Adjacency list:")
-        for i in range(len(adj_list)):
-            print(i+1, end=". ")
-            for j in range(len(adj_list[i])):
-                print(adj_list[i][j], end=" ")
-            print()
-
+        adjacency_list = convert_Adjacency_matrix_into_Adjacency_list(data_matrix)
+        print_adjacency_list(adjacency_list)
         print()
         print("Adjacency matrix -> Incidence matrix:")
         incidence_matrix = convert_Adjacency_matrix_into_Incidence_matrix(data_matrix)
-        print(*incidence_matrix, sep="\n")
-        
-        graph = draw_graph(adjacency_matrix)
+        print_matrix(incidence_matrix)
+        print()
+        graph = draw_graph(data_matrix)
 
     elif graph_rep_type == "adjacency list":
-        # input was Adjacency list
-        adjacency_matrix = convert_Adjacency_list_into_Adjacency_matrix(data_matrix)
+        adjacency_list = data_matrix
+        print()
+        print("input is Adjacency list:")
+        print_adjacency_list(adjacency_list)
         print()
         print("Adjacency list -> Adjacency matrix:")
-        print(*adjacency_matrix,sep="\n")
-
-        incidence_matrix = convert_Adjacency_list_into_Incidence_matrix(data_matrix)
+        adjacency_matrix = convert_Adjacency_list_into_Adjacency_matrix(data_matrix)
+        print_matrix(adjacency_matrix)
         print()
         print("Adjacency list -> Incidence matrix:")
-        print(*incidence_matrix,sep="\n")
-        
+        incidence_matrix = convert_Adjacency_list_into_Incidence_matrix(data_matrix)
+        print_matrix(incidence_matrix)
+        print()
         graph = draw_graph(adjacency_matrix)
 
-    elif graph_rep_type == "incidence matrix":    
-        # input was Incidence matrix
-        adjacency_matrix = convert_Incidence_matrix_into_Adjacency_matrix(data_matrix)
+    elif graph_rep_type == "incidence matrix":
+        incidence_matrix = data_matrix
+        print()
+        print("input is Incidence matrix:")
+        print_matrix(incidence_matrix)
+        print()
         print("Incidence matrix -> Adjacency matrix:")
-        print(*adjacency_matrix, sep="\n")
-
-        adj_list = convert_Incidence_matrix_into_Adjacency_list(data_matrix)
+        adjacency_matrix = convert_Incidence_matrix_into_Adjacency_matrix(data_matrix)
+        print_matrix(adjacency_matrix)
         print()
         print("Incidence matrix -> Adjacency list:")
-        for i in range(len(adj_list)):
-            print(i+1,end=". ")
-            for j in range(len(adj_list[i])):
-                print(adj_list[i][j],end=" ")
-            print()
-        
+        adjacency_list = convert_Incidence_matrix_into_Adjacency_list(data_matrix)
+        print_adjacency_list(adjacency_list)
+        print()
         draw_graph(adjacency_matrix)
-
