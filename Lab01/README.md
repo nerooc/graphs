@@ -6,6 +6,8 @@ The representations have to meet some requirements.
 
 ### Program should be run with command `python3 task1.py path_to_file` 
 
+If `path_to_file` not specified, program will try to open file called *input.txt*
+
 ### Requirements for Adjacency matrix input file:
 
 1. File should contain only rows with matrix (no enters before matrix and after).
