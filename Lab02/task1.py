@@ -18,6 +18,10 @@ if __name__ == '__main__':
 	if(isDegreeSequence(l)):
 		print('Given sequence IS a degree sequence')
 		G = degSeq2adjMat(l)
-		print("Adjacency matrix:\n", G)
+		print("Adjacency matrix:")
+		try:
+			pretty_print(G)
+		except Exception as e:
+			print(e)
 	else:
 		print('Given sequence IS NOT a degree sequence')
