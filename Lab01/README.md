@@ -15,9 +15,7 @@ Example:
 
 ```
 0 1 1 <- first line
-
 1 0 0
-
 1 0 0 <- last line
 ```
 
@@ -30,11 +28,9 @@ Example:
 Example:
 
 ```
-1 2 3 <- first line
-
-2 1
-
-3 1 <- last line
+1. 2 3 <- first line
+2. 1
+3. 1 <- last line
 ```
 
 ### Requirements for Incidence matrix input file:
@@ -46,9 +42,7 @@ Example:
 
 ```
 1 1 <- first line
-
 1 0
-
 0 1 <- last line
 ```
 
