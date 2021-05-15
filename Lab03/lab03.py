@@ -182,38 +182,65 @@ def distance_matrix(graph: list) -> list:
 
 # task 4 written by Piotr Matiaszewski
 
-def get_graph_centre_from_distance_matrix(distance_matrix: list) -> (int,int):
-	""" Function computing graph centre (vertex that has the smallest sum of distances to other vertices).
+def get_graph_centre_from_distance_matrix(distance_matrix: list) -> dict:
+	""" Function computing graph centre (vertex that has the smallest sum of distances to other vertices). If there is more than one, function returns all of them.
 	Arguments: 
 		distance_matrix {list} -- matrix of distances from every vertex to another (distance_matrix[i][j] equals distance_matrix[j][i])
 	
 	Returns:
-		index_of_centre_vertex {int} -- index of vertex being graph centre
-		final_total_distance {int} -- total sum of distances from graph centre to all other vertices
+		final_total_distances {dict} -- dictionary containing as keys number of vertex and as values total sum of distances from found graph centre (corresponding key) to all other vertices
 	"""
 	total_distance_from_others = {}
+	final_total_distances={} #we have plural form here cause there might be more than one graph centre
 	for index, row in enumerate(distance_matrix, start = 1):
 		total_distance_from_others[index] = sum(row)
-	index_of_centre_vertex = min(total_distance_from_others, key = total_distance_from_others.get)
-	final_total_distance=total_distance_from_others[index_of_centre_vertex]
-	return index_of_centre_vertex, final_total_distance
+	minval = min(total_distance_from_others.values())
+	indexes_of_centre_vertices = [k for k, v in total_distance_from_others.items() if v==minval]
+	for i in indexes_of_centre_vertices:
+		final_total_distances[i]=total_distance_from_others[i]
+	return final_total_distances
 
 
-def get_minimax_centre_from_distance_matrix(distance_matrix: list) -> (int,int):
-	""" Function computing minimax centre (vertex that has the smallest distance to the farthest vertex).
+def get_minimax_centre_from_distance_matrix(distance_matrix: list) -> dict:
+	""" Function computing minimax centres (vertices that have the smallest distance to the farthest vertex).
 	Arguments: 
 		distance_matrix {list} -- matrix of distances from every vertex to another (distance_matrix[i][j] equals distance_matrix[j][i])
 	
 	Returns:
-		index_of_minimax_vertex {int} -- index of vertex being minimax centre
-		final_total_distance {int} -- distance to the farthest vertex from minimax centre
+		final_total_distances {dict} -- dictionary containing as keys minimax centers and as values distances to the farthest vertex from current minimax centre(key)
 	"""
 	max_distances_to_farthest_vertex = {}
+	final_total_distances={} #we have plural form here cause there might be more than one minimax centre
 	for index, row in enumerate(distance_matrix, start = 1):
 		max_distances_to_farthest_vertex[index] = max(row)
-	index_of_minimax_vertex = min(max_distances_to_farthest_vertex, key = max_distances_to_farthest_vertex.get)
-	final_total_distance=max_distances_to_farthest_vertex[index_of_minimax_vertex]
-	return index_of_minimax_vertex, final_total_distance
+	minval = min(max_distances_to_farthest_vertex.values())
+	indexes_of_centre_vertices = [k for k, v in max_distances_to_farthest_vertex.items() if v==minval]
+	for i in indexes_of_centre_vertices:
+		final_total_distances[i]=minval
+	return final_total_distances
+
+def print_centers_function(distance_matrix: list) -> None:
+    """Function that prints centers and minimax centers for provided distance matrix of a graph
+
+    Arguments:
+		distance_matrix {list} -- distance matrix of a graph
+    
+    """
+    for row in distance_matrix:
+            print(row)
+    found_centres=get_graph_centre_from_distance_matrix(distance_matrix)
+    if len(found_centres)>1:
+        print("\nThere is more than one graph center!")
+    for center in found_centres:
+        print("\nCenter = " + str(center) + " (Distances sum = " +
+            str(found_centres[center])+").")
+    minimax_centers=get_minimax_centre_from_distance_matrix(distance_matrix)
+    print("-------------------------------------------------------")
+    if len(minimax_centers)>1:
+        print("\nThere is more than one minimax center!")
+    print()
+    for minimax in minimax_centers:
+        print("Minimax center = "+str(minimax)+" (Distance from the farthest: "+str(minimax_centers[minimax])+")\n")
 
 ########################################################################
 
