@@ -78,8 +78,7 @@ if __name__ == "__main__":
         graph=generate_random_graph(10)
         graph = add_int_weights(graph)
         print("For provided input (matrix below):\n\n")
-        for row in graph:
-            print(row)
+        pretty_print(graph)
         print("\n\nComputed distance matrix: \n\n")
         distance_matrix_=distance_matrix(graph)
         print_centers_function(distance_matrix_)

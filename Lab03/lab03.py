@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt #for task 5
 # import for task 1
 import random
 from lab01 import generate_graph_b
-from lab02 import COMPONENTS, find_vertices_of_biggest_component, graph_randomization
+from lab02 import COMPONENTS, find_vertices_of_biggest_component, graph_randomization, pretty_print
 
 
 # task 1 written by Karol Szeliga
@@ -226,8 +226,7 @@ def print_centers_function(distance_matrix: list) -> None:
 		distance_matrix {list} -- distance matrix of a graph
     
     """
-    for row in distance_matrix:
-            print(row)
+    pretty_print(distance_matrix)
     found_centres=get_graph_centre_from_distance_matrix(distance_matrix)
     if len(found_centres)>1:
         print("\nThere is more than one graph center!")
