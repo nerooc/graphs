@@ -522,5 +522,20 @@ def draw_hamilton(g_am: list, cycle: list):
     nx.draw_networkx_labels(g, pos, labels)
     plt.axis('square')
     plt.show()
+
+def pretty_print(matrix: list):
+    '''Function printing array in a way that is compatible with previous functions 
+    of ours.
+
+    Arguments:
+        matrix {list} -- matrix to be printed
+    '''
+    if matrix is not None:
+        for row in matrix:
+            for element in row:
+                print(int(element), end=' ')
+            print()
+    else:
+        raise Exception("Matrix is empty.")
  
 ########################################################################

@@ -15,6 +15,9 @@ if len(sys.argv) < 2:
 if __name__ == '__main__':
 	file_name=sys.argv[1]
 	if(os.path.isfile(file_name)):
+		if(os.path.getsize(file_name) == 0):
+			print(f"Sorry, file named {file_name} is empty.")
+			exit(-1)
 		try:
 			matrix = np.loadtxt(file_name, delimiter=" ")
 			matrix = np.array(matrix)
