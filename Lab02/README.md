@@ -117,4 +117,13 @@ The tests contain the function calls for:
 0 0 1 0 0 0 0 1 0 0 0 0
 ```
 
+- **#3** - Semi-hamiltonian graph in form of AL
+```
+1 2 3
+2 1 3
+3 1 2 4 5
+4 3 5
+5 3 4
+```
+
 ### More info **to be added soon**.
