@@ -22,19 +22,21 @@ The program allows user to find all components in given degree sequence represen
 
 ## Task 4 - Eulerian cycle
 
-The program allows user to find and display Eulerian cycle in a randomly generated Eulerian graph.
+The program allows user to find and display Eulerian cycle in a randomly generated Eulerian graph using **DFS** by default.
 
 ### 4.1 How to run the program
 
-`python3 task4.py [number-of-vertices]`
+`python3 task4.py [-f] [number-of-vertices]`
 
-Where `number-of-vertices` defines graph's size as an **integer** and should be a number within the range of **[3, 60]**.
+Where:
+- `[-f]` defines if we want to use Fleury's algorithm,
+- `[number-of-vertices]` defines graph's size as an **integer** and should be a number within the range of **[3, 60]**
 
 ### 4.2 Testing
 
 `python3 task4.py test`
 
-The tests contain the function calls for:
+The tests contain the function calls **(only for the DFS algorithm)** for:
 
 - **#1 - minimal (3)** number of vertices in the range, <br/>
 - **#2 - maximal (60)** number of vertices in the range, <br/>
@@ -115,6 +117,15 @@ The tests contain the function calls for:
 0 0 0 0 0 0 0 0 1 0 0 0
 0 0 0 1 0 0 0 0 0 0 0 0
 0 0 1 0 0 0 0 1 0 0 0 0
+```
+
+- **#3** - Semi-hamiltonian graph in form of AL
+```
+1 2 3
+2 1 3
+3 1 2 4 5
+4 3 5
+5 3 4
 ```
 
 ### More info **to be added soon**.

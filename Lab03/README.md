@@ -41,5 +41,23 @@ The tests contain the function calls for:
 - **#2** - Generated graph of max 30 vertices, <br/>
 
 ## Task 4 - Graph center
+The program allows user to find center and minimax center of a graph.
+
+### 4.1 How to run the program
+
+`python3 task4.py`
+
+### 4.2 Testing
+
+`python3 task4.py test`
+
+The tests contain the function calls for:
+- **#1** - Simple distance matrix, one center, one minimax center <br/>
+- **#2** - Bigger distance matrix, one center, one minimax center <br/>
+- **#3** - Distance matrix, two centers, one minimax center<br/>
+- **#4** - Distance matrix, one center, two minimax centers<br/>
+- **#5** - Distance matrix, two centers, two minimax centers<br/>
+
+
 
 ## Task 5 - Minimum spanning tree
