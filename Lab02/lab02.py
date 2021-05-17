@@ -343,7 +343,7 @@ def find_vertices_of_biggest_component(components: list):
 
 ########################################################################
  
-# task 4 written by Tomasz Gajda
+# task 4.1 (DFS) written by Tomasz Gajda
 
 def is_consistent(deg_seq: list) -> bool:
     '''Function checking if the graph presented by degree sequence is consistent
@@ -387,12 +387,15 @@ def generate_eulerian(n: int) -> list:
 		{list} -- adjacency matrix of generated Eulerian graph
 	'''
     while True:
-        deg_seq = [random.randint(1, int(n/2)) * 2 for x in range(n)]
+        deg_seq = []
+        for x in range(n):
+            deg_seq.append(random.randint(1, int(n/2)) * 2)
+
         if(isDegreeSequence(deg_seq) and is_euler(deg_seq)):
             return degSeq2adjMat(deg_seq).astype(int).tolist()
 
 
-def euler_cycle(graph: list) -> list:
+def euler_cycle_dfs(graph: list) -> list:
     '''Function finding Euler cycle using DFS 
 
 	Arguments:
@@ -413,7 +416,97 @@ def euler_cycle(graph: list) -> list:
 
     euler_dfs(0)
 
-    return [x+1 for x in cycle]
+    return [(cycle[i] + 1, cycle[i+1] + 1) for i in range(len(cycle) - 1) ]
+
+
+# task 4.2 (FLEURY) written by Tomasz Gajda
+
+def remove_vertex(graph_list: list , v: int) -> list:
+    '''Function removing vertex from a graph
+
+	Arguments:
+		graph_list {list} -- graph in form of an adjacency list
+        v {int} -- vertex we want to remove
+
+	Returns:
+		{list} -- graph without given vertex as an adjacency list
+	'''
+    graph = convert_Adjacency_list_into_Adjacency_matrix(graph_list)
+
+    size = len(graph)
+    if(v > size):
+        print("Vertex not found!")
+    else:
+        while(v < size - 1):
+            for i in range(0, size):
+                graph[i][v]= graph[i][v + 1]
+        
+            for i in range(0, size):
+                graph[v][i]= graph[v + 1][i]
+            v = v + 1
+    size -= 1
+    new_matrix = []
+    for i in range(size):
+        new_matrix.append(graph[i][:size])
+    return convert_Adjacency_matrix_into_Adjacency_list(new_matrix)
+
+
+def is_bridge(graph: list, v: int, u: int) -> bool:
+    '''Function checking if specific edge is a bridge
+
+	Arguments:
+		graph {list} -- graph in form of an adjacency list
+        v {int} -- first edge idx
+        u {int} -- second edge idx
+
+	Returns:
+		{bool} -- bool defining if edge is a bridge or not
+	'''
+    graph_adj_mat = convert_Adjacency_list_into_Adjacency_matrix(graph)
+    graph_adj_mat[v-1][u-1] = graph_adj_mat[u-1][v-1] = 0
+    return max(COMPONENTS(graph_adj_mat)) > 1
+
+
+def euler_cycle_fleury(graph, start_v = 1, cycle = [], aliases = {}):
+    '''Function returning Eulerian Cycle using Fleury's algorithm
+
+	Arguments:
+		graph {list} -- graph in form of an adjacency list
+        start_v {int} -- the vertex algorithm starts from
+        cycle {list} -- current cycle
+        aliases {dict} -- holding aliases for changed indexes
+
+	Returns:
+		{list} -- list containing eulerian cycle
+	'''
+    if len(aliases) == 0:
+        for i in range(len(graph)):
+            aliases[i+1] = i+1
+
+    if len(graph[start_v - 1]) == 0:
+        return
+
+    u = -1
+    for i in graph[start_v - 1]:
+        if not is_bridge(graph, start_v, i):
+            u = i
+            break
+    if u == -1:
+        u = graph[start_v - 1][0]
+
+    graph[start_v - 1].remove(u)
+    graph[u - 1].remove(start_v)
+    cycle.append((aliases.get(start_v), aliases.get(u)))
+
+    if len(graph[start_v - 1]) == 0:
+        graph = remove_vertex(graph, start_v - 1)
+        for i in range(start_v, len(graph) + 1):
+            aliases[i] = aliases.get(i+1)
+        if u > start_v:
+            u = u - 1
+    
+    euler_cycle_fleury(graph, u, cycle)
+    return cycle
 
 ########################################################################
 

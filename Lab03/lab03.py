@@ -104,7 +104,7 @@ def dijkstra(graph: list, v_start: int) -> tuple:
 		predecessors -- predecessors of all vertices
 	'''
 	rank = len(graph)
-	path_costs = [2**30 for _ in range(rank)]
+	path_costs = [2**32 for _ in range(rank)]
 	predecessors = [None for _ in range(rank)]
 	path_costs[v_start] = 0
 

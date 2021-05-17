@@ -7,15 +7,16 @@ Script by Tomasz Gajda
 import sys
 import copy as cp
 
+from lab01 import read_graph_file_return_Adjacency_matrix
 from lab02 import draw_graph
 from lab03 import dijkstra, print_dijkstra, generate_random_graph, add_int_weights
 from random import randrange
 
 if __name__ == "__main__": 
-    if len(sys.argv) != 2:
-        raise Exception("Run as: task2.py [v_start]")
 
-    graph = [[0,  3,  0,  2,  0,  0,  0,  0,  4],   
+    #TESTING###########################################################################
+    if(sys.argv[1] == "test"):
+        graph = [[0,  3,  0,  2,  0,  0,  0,  0,  4],   
             [3,  0,  0,  0,  0,  0,  0,  4,  0],
             [0,  0,  0,  6,  0,  1,  0,  2,  0],
             [2,  0,  6,  0,  1,  0,  0,  0,  0],
@@ -25,8 +26,6 @@ if __name__ == "__main__":
             [0,  4,  2,  0,  0,  0,  0,  0,  0],
             [4,  0,  0,  0,  8,  0,  0,  0,  0]]
 
-    #TESTING###########################################################################
-    if(sys.argv[1] == "test"):
         print("\nTEST #1 - Test for first vertex of the graph:\n")
         path_costs, predecessors = dijkstra(graph, 0)
         print_dijkstra(path_costs, predecessors, 0)
@@ -36,23 +35,18 @@ if __name__ == "__main__":
         sys.exit("End of testing")
     #TESTING###########################################################################
 
-    v_start = int(sys.argv[1])
-    min_vertices = v_start
+    if len(sys.argv) != 3:
+        raise Exception("Run as: task2.py InputFiles/[file-name] [start-vertex]")
 
-    #if we are looking for a path for the first vertex, let's give it a chance to generate a bigger graph
-    if min_vertices < 6:
-        min_vertices = 6 
+    try: 
+        start_vertex = int(sys.argv[2])
+    except ValueError:
+        print("[start-vertex] has to be an integer!")
 
-    #graph generation
-    graph = generate_random_graph(min_vertices)
+    file_name = sys.argv[1]
 
-    while len(graph) < v_start + 1:
-        graph = generate_random_graph(min_vertices + 5)
-
-    weightless_graph = cp.deepcopy(graph)
-    graph = add_int_weights(graph)
-    print(graph)
-
-    path_costs, predecessors = dijkstra(graph, v_start)
-    print_dijkstra(path_costs, predecessors, v_start)
-    draw_graph(weightless_graph)
+    graph = read_graph_file_return_Adjacency_matrix(file_name)
+    
+    path_costs, predecessors = dijkstra(graph, start_vertex)
+    print_dijkstra(path_costs, predecessors, start_vertex)
+    draw_graph(graph)

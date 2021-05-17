@@ -30,7 +30,19 @@ if __name__ == "__main__":
         else:
             print("There is no Hamiltonian cycle in the graph.")
 
-        sys.exit("End of testing")
+
+        print("\nTEST #3 - Test for semi-Hamiltonian graph")
+        graph, graph_adj_mat = prepare_for_hamilton("InputFiles/semi_hamiltonian_adj_list.txt")
+        result_cycle = hamilton_cycle(graph)
+
+        if result_cycle:
+            print("The graph is Hamiltonian and the cycle is:")
+            print(result_cycle)
+            draw_hamilton(graph_adj_mat, result_cycle)
+        else:
+            print("There is no Hamiltonian cycle in the graph.")
+
+        sys.exit("\nEnd of testing")
     #TESTING###########################################################################
 
     file_name = sys.argv[1]
