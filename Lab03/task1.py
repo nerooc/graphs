@@ -13,4 +13,12 @@ if __name__ == "__main__":
     adjacency_matrix1 = generate_random_graph(max_vertices_num)
     draw_two_graphs(adjacency_matrix1, generate_random_graph(max_vertices_num))
     adjacency_matrix_with_weights = add_int_weights(adjacency_matrix1)
-    print("graph1 weights: ", adjacency_matrix_with_weights)
+    with open("graph.txt", "w") as f:
+        for row in adjacency_matrix1:
+            for col in row:
+                f.write(str(col)+" ")
+            f.write("\n")
+        f.close()
+    print("graph1 weights: ")
+    for row in adjacency_matrix_with_weights:
+        print(row)
