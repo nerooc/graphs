@@ -45,7 +45,10 @@ The program allows user to find center and minimax center of a graph.
 
 ### 4.1 How to run the program
 
-`python3 task4.py`
+`python3 task4.py` - this command runs program on randomly generated graph and computes its centers.
+
+`python3 task4.py <path to file>` - this command runs program on any graph given in file containing adjacency matrix, especially graph generated in *task1.py*.
+
 
 ### 4.2 Testing
 
@@ -61,3 +64,9 @@ The tests contain the function calls for:
 
 
 ## Task 5 - Minimum spanning tree
+
+The program allows user to find and display Minimal Spanning Tree of the graph given in adjacency matrix provided as an argument.
+
+### 5.1 How to run the program
+
+`python3 task5.py <path to file>`
