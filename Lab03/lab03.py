@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt #for task 5
 
 # import for task 1
 import random
+import math
 from lab01 import generate_graph_b
 from lab02 import COMPONENTS, find_vertices_of_biggest_component, graph_randomization, pretty_print
 
@@ -115,7 +116,7 @@ def dijkstra(graph: list, v_start: int) -> tuple:
 		predecessors -- predecessors of all vertices
 	'''
 	rank = len(graph)
-	path_costs = [2**32 for _ in range(rank)]
+	path_costs = [math.inf for _ in range(rank)]
 	predecessors = [None for _ in range(rank)]
 	path_costs[v_start] = 0
 

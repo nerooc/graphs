@@ -7,9 +7,8 @@ Script by Tomasz Gajda
 import sys
 import copy as cp
 
-from lab01 import read_graph_file_return_Adjacency_matrix
 from lab02 import draw_graph
-from lab03 import dijkstra, print_dijkstra, generate_random_graph, add_int_weights
+from lab03 import dijkstra, print_dijkstra, generate_random_graph, add_int_weights, read_graph
 from random import randrange
 
 if __name__ == "__main__": 
@@ -45,8 +44,7 @@ if __name__ == "__main__":
 
     file_name = sys.argv[1]
 
-    graph = read_graph_file_return_Adjacency_matrix(file_name)
+    graph = read_graph(file_name)
     
     path_costs, predecessors = dijkstra(graph, start_vertex)
     print_dijkstra(path_costs, predecessors, start_vertex)
-    draw_graph(graph)
