@@ -68,6 +68,16 @@ def generate_random_graph(max_vertex_num):
     component_mixed_adjacency_matrix = delete_empty_vertices(mixed_adjacency_matrix)
     return component_mixed_adjacency_matrix
 
+
+def read_graph(file_path):
+    try:
+        with open(file_path, "r") as f:
+            return [[int(num) for num in line.split() if num.isdigit()] for line in f]
+    except FileNotFoundError:
+        print("\nSorry, there is no file called '" + file_path + "'\n")
+        exit(-1)
+
+	
 ########################################################################
 
 # task 2 written by Tomasz Gajda
