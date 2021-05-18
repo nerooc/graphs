@@ -531,7 +531,7 @@ def pretty_print(matrix: list):
         matrix {list} -- matrix to be printed
     '''
     if matrix is not None:
-        print('\n'.join(['\t'.join([str(cell) for cell in row]) for row in matrix]))
+        print('\n'.join(['\t'.join([str(int(cell)) for cell in row]) for row in matrix]))
     else:
         raise Exception("Matrix is empty.")
  

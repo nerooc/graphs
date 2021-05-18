@@ -1,5 +1,6 @@
 from lab03 import *
 import sys
+import os
 
 ### matrices for testing purposes
 matrix=[ #normal case - matrix, one centre, one minimax centre
@@ -47,40 +48,58 @@ matrix_two_minimax_centers=[ #edge case - two minimax centers
 ]
 
 matrix_both_twice_centers=[#edge case - two minimax centers and two centers
-    [0, 1, 3, 2, 3],
+	[0, 1, 3, 2, 3],
 [1, 0, 3, 3, 2],
 [3, 3, 0, 5, 1],
 [2, 3, 5, 0, 5]
 ]
 
 if __name__ == "__main__": 
-    if len(sys.argv)==2:
-        if sys.argv[1]=='test':
-            print("-----TEST MODE - TEST 1 - Simple case - small matrix, one center, one minimax center-----\n")
-            print("Performing test for distance matrix:\n")
-            print_centers_function(matrix)
-            print("\n-----TEST 2- Simple case - bigger matrix----\n")
-            print("Performing test for distance matrix:\n")
-            print_centers_function(matrix_2)
-            print("\n-----TEST 3- Edge case - graph with 2 centers----\n")
-            print("Performing test for distance matrix:\n")
-            print_centers_function(matrix_two_centers)
-            print("\n-----TEST 4- Edge case - graph with 2 centers----\n")
-            print("Performing test for distance matrix:\n")
-            print_centers_function(matrix_two_minimax_centers)
-            print("\n-----TEST 5- Edge case - graph with 2 centers and two minimax centers----\n")
-            print("Performing test for distance matrix:\n")
-            print_centers_function(matrix_both_twice_centers)
-        else:
-            print("The only valid second arg is 'test'")
-    ############## MAIN
-    elif len(sys.argv)==1:
-        graph=generate_random_graph(10)
-        graph = add_int_weights(graph)
-        print("For provided input (matrix below):\n\n")
-        pretty_print(graph)
-        print("\n\nComputed distance matrix: \n\n")
-        distance_matrix_=distance_matrix(graph)
-        print_centers_function(distance_matrix_)
-    else:
-        print("You must provide 1 or 2 arguments.")
+	if len(sys.argv)==2:
+		if sys.argv[1]=='test':
+			print("-----TEST MODE - TEST 1 - Simple case - small matrix, one center, one minimax center-----\n")
+			print("Performing test for distance matrix:\n")
+			print_centers_function(matrix)
+			print("\n-----TEST 2- Simple case - bigger matrix----\n")
+			print("Performing test for distance matrix:\n")
+			print_centers_function(matrix_2)
+			print("\n-----TEST 3- Edge case - graph with 2 centers----\n")
+			print("Performing test for distance matrix:\n")
+			print_centers_function(matrix_two_centers)
+			print("\n-----TEST 4- Edge case - graph with 2 centers----\n")
+			print("Performing test for distance matrix:\n")
+			print_centers_function(matrix_two_minimax_centers)
+			print("\n-----TEST 5- Edge case - graph with 2 centers and two minimax centers----\n")
+			print("Performing test for distance matrix:\n")
+			print_centers_function(matrix_both_twice_centers)
+		else:
+			file_name = sys.argv[1]
+			if(os.path.isfile(file_name)):
+				if(os.path.getsize(file_name) == 0):
+					print(f"Sorry, file named {file_name} is empty.")
+					exit(-1)
+				try:
+					graph = np.loadtxt(file_name, delimiter=" ")
+					# graph = np.array(matrix)
+					print("For provided input (matrix below):\n\n")
+					pretty_print(graph)
+					print("\n\nComputed distance matrix: \n\n")
+					distance_matrix_=distance_matrix(graph)
+					print_centers_function(distance_matrix_)
+				except ValueError:
+					print(f"{file_name} contains incorrect data (probaly not separated by spaces)")
+					exit(-1)
+			else:
+				print(f"Sorry, there is no file named {file_name}.")
+				exit(-1)
+	############## MAIN
+	elif len(sys.argv)==1:
+		graph=generate_random_graph(10)
+		graph = add_int_weights(graph)
+		print("For provided input (matrix below):\n\n")
+		pretty_print(graph)
+		print("\n\nComputed distance matrix: \n\n")
+		distance_matrix_=distance_matrix(graph)
+		print_centers_function(distance_matrix_)
+	else:
+		print("You must provide 1 or 2 arguments.")
