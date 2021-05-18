@@ -39,6 +39,8 @@ def delete_empty_vertices(adjacency_matrix):
 
 
 def add_int_weights(adjacency_matrix, min_int_weight=1, max_int_weight=10):
+    if adjacency_matrix == 1:
+        return int(random.choice(range(min_int_weight, max_int_weight)))
     for i in range(len(adjacency_matrix)):
         for j in range(i, len(adjacency_matrix[i])):
             if adjacency_matrix[i][j] == 1:
@@ -55,17 +57,16 @@ def add_int_weights(adjacency_matrix, min_int_weight=1, max_int_weight=10):
 def generate_random_graph(max_vertex_num):
     random_probability = random.uniform(0.0, 1.0)
     adjacency_matrix = generate_graph_b(max_vertex_num, random_probability)
-    vertices_in_final_matrix = find_vertices_of_biggest_component(COMPONENTS(adjacency_matrix))
-    adjacency_matrix = adjacency_matrix.tolist()
+    mixed_adjacency_matrix = graph_randomization(adjacency_matrix)
+    vertices_in_final_matrix = find_vertices_of_biggest_component(COMPONENTS(mixed_adjacency_matrix))
     if len(vertices_in_final_matrix) < 2:
-        return {1}
-    if len(vertices_in_final_matrix) < len(adjacency_matrix[0]):
-        for v in range(len(adjacency_matrix[0])):
+        return [1]
+    if len(vertices_in_final_matrix) < len(mixed_adjacency_matrix[0]):
+        for v in range(len(mixed_adjacency_matrix[0])):
             if not vertices_in_final_matrix.__contains__(v+1):
-                adjacency_matrix = zeros_vertex_degree(adjacency_matrix, v)
-    component_adjacency_matrix = delete_empty_vertices(adjacency_matrix)
-    random_component_adjacency_matrix = graph_randomization(component_adjacency_matrix)
-    return random_component_adjacency_matrix
+                mixed_adjacency_matrix = zeros_vertex_degree(mixed_adjacency_matrix, v)
+    component_mixed_adjacency_matrix = delete_empty_vertices(mixed_adjacency_matrix)
+    return component_mixed_adjacency_matrix
 
 ########################################################################
 
