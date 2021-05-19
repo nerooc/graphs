@@ -22,7 +22,7 @@ The program allows user to randomise graph without changing vertices degrees.
 
 ### 2.1 How to run the program
 
-`python3 task2.py path_to_file`
+`python3 task2.py number_of_mixes path_to_file`
 
 ## Task 3 - Graph components
 
