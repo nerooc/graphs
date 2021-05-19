@@ -37,11 +37,13 @@ if __name__ == "__main__":
 
     print("This is graph randomization. Path to graph data file should be typed in input args")
     file_name = 'InputFiles/input.txt'
+    mixes_num = 0  # if input will be 0 then function will mix vertices randomly
     if len(sys.argv) == 1:
         print("No input in program args, trying to open file \'InputFiles/input.txt\'...\n")
     else:
-        file_name = sys.argv[1]  # path to file with graph data
+        mixes_num = int(sys.argv[1])
+        file_name = sys.argv[2]  # path to file with graph data
 
     adjacency_matrix = read_graph_file_return_Adjacency_matrix(file_name)
-    draw_two_graphs(adjacency_matrix, graph_randomization(adjacency_matrix, True),
+    draw_two_graphs(adjacency_matrix, graph_randomization(adjacency_matrix, mixes_num, True),
                     'before randomization:', 'after randomization:')

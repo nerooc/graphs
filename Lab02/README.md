@@ -16,13 +16,16 @@ The program allows user to check whether given sequence is a degree sequence (re
 
 `python3 task1.py`
 
+After using this command, the program will ask user to provide sequence to be checked.
+**NOTE: Integers in sequence have to be separated by spaces**
+
 ## Task 2 - Graph randomization
 
 The program allows user to randomise graph without changing vertices degrees.
 
-### 1.1 How to run the program
+### 2.1 How to run the program
 
-`python3 task2.py path_to_file`
+`python3 task2.py number_of_mixes path_to_file`
 
 ## Task 3 - Graph components
 
@@ -30,8 +33,8 @@ The program allows user to find all components in given degree sequence represen
 
 ### 3.1 How to run the program
 
-- user has to specify sequence: `python3 task3.py` 
-- user has to specify path to the file containing adjacency matrix as an argument: `python task3.py -am <path to file>`
+- user has to specify sequence (after this command, likewise in [*task1*](#task-1---degree-sequence)): `python3 task3.py` 
+- user has to specify path to the file containing adjacency matrix as an argument: `python3 task3.py -am <path to file>`
 
 ## Task 4 - Eulerian cycle
 
