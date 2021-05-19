@@ -20,7 +20,7 @@ The program allows user to check whether given sequence is a degree sequence (re
 
 The program allows user to randomise graph without changing vertices degrees.
 
-### 1.1 How to run the program
+### 2.1 How to run the program
 
 `python3 task2.py path_to_file`
 
