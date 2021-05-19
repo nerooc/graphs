@@ -47,7 +47,7 @@ The program allows user to find center and minimax center of a graph.
 
 ### 4.1 How to run the program
 
-`python3 task4.py` - this command runs program on randomly generated graph and computes its centers.
+`python3 task4.py` - this command runs program on graph given in form of adjacency matrix (file 'graph.txt' in current folder generated in task1.py) and computes its centers.
 
 `python3 task4.py <path to file>` - this command runs program on any graph given in file containing adjacency matrix, especially graph generated in *task1.py*.
 
