@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
 
         print("\nTEST #3 - Test for semi-Hamiltonian graph")
-        graph, graph_adj_mat = prepare_for_hamilton("InputFiles/semi_hamiltonian_adj_list.txt")
+        graph, graph_adj_mat = prepare_for_hamilton("InputFiles/semi_hamilton_adj_list.txt")
         result_cycle = hamilton_cycle(graph)
 
         if result_cycle:

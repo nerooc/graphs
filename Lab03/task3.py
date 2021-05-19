@@ -5,7 +5,7 @@ Script by Tomasz Gajda
 """
 
 import sys
-from lab03 import generate_random_graph, add_int_weights, distance_matrix, read_graph
+from lab03 import generate_random_graph, add_int_weights, distance_matrix, read_graph, pretty_print
 
 if __name__ == "__main__": 
     if len(sys.argv) != 2:
@@ -31,5 +31,4 @@ if __name__ == "__main__":
     file_name = sys.argv[1]
     graph = read_graph(file_name)
 
-    for row in distance_matrix(graph):
-        print(row)
+    pretty_print(distance_matrix(graph))
