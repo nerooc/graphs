@@ -7,7 +7,7 @@ Script by Tomasz Gajda
 import sys
 import copy as cp
 
-from lab02 import draw_graph
+from lab01 import draw_graph_with_weights
 from lab03 import dijkstra, print_dijkstra, generate_random_graph, add_int_weights, read_graph
 from random import randrange
 
@@ -48,3 +48,4 @@ if __name__ == "__main__":
     
     path_costs, predecessors = dijkstra(graph, start_vertex)
     print_dijkstra(path_costs, predecessors, start_vertex)
+    draw_graph_with_weights(graph)
