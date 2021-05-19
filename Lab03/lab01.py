@@ -285,6 +285,45 @@ def draw_graph(data_matrix,node_colors_tab=None):
 	#else: #else never happens in lab1, we do not want to color anything
 	#	display_graph_coloured_sequences(graph,node_colors_tab)
 
+# ------------------------------THREE FUNCTIONS FOR Lab03 ------------------
+
+
+def draw_edges_from_adjacency_matrix_with_weights(g,data_matrix): #we assume the matrix is symmetrical, what allows us to iterate through its half only
+	'''Function adding edges with weights to graph g. Edges and weights are read from adjacency matrix representation of the graph. 
+	Arguments:
+		g {networkx.classes.graph.Graph} -- graph object with nodes that are already set and positioned
+		data_matrix {list} -- adjacency matrix representation of graph
+	Returns:
+		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
+	'''
+	for i in range(len(data_matrix)):
+		for j in range(i+1,len(data_matrix)):
+			if(data_matrix[i][j]!=0):
+				g.add_edge(i+1,j+1,weight=data_matrix[i][j])
+	return g
+
+def display_graph_with_networkx(g):
+	'''Function displaying graph to user using networkx functions
+	Arguments:
+		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
+	'''
+	pos = nx.circular_layout(g)
+	nx.draw(g, pos, node_size=800, with_labels=True)
+	labels = nx.get_edge_attributes(g,'weight')
+	nx.draw_networkx_edge_labels(g,pos, edge_labels=labels)
+	plt.axis('square') # square plot provides the real circle shape of graph
+	plt.show()
+
+def draw_graph_with_weights(data_matrix):
+	''' Alternative "Main" function calling other functions in order to draw graph with weights.
+	Arguments:
+		data_matrix {list} -- adjacency matrix representation of graph
+		node_colors_tab {list} -- list containing color of every node. If not provided, nodes will have default color   
+	'''
+	graph=draw_nodes(data_matrix)
+	graph=draw_edges_from_adjacency_matrix_with_weights(graph,data_matrix)
+	display_graph_with_networkx(graph)
+
 ###############################################################################################
 
 #task3 written by Bartosz Rogowski
