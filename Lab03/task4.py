@@ -94,12 +94,14 @@ if __name__ == "__main__":
 				exit(-1)
 	############## MAIN
 	elif len(sys.argv)==1:
-		graph=generate_random_graph(10)
-		graph = add_int_weights(graph)
-		print("For provided input (matrix below):\n\n")
-		pretty_print(graph)
-		print("\n\nComputed distance matrix: \n\n")
-		distance_matrix_=distance_matrix(graph)
-		print_centers_function(distance_matrix_)
+		if(os.path.isfile('graph.txt')):
+			graph=read_graph('graph.txt')
+			print("For provided input (matrix below):\n\n")
+			pretty_print(graph)
+			print("\n\nComputed distance matrix: \n\n")
+			distance_matrix_=distance_matrix(graph)
+			print_centers_function(distance_matrix_)
+		else:
+			print("Calling function without arguments -- you need to provide file 'graph.txt' in current folder")
 	else:
 		print("You must provide 1 or 2 arguments.")
