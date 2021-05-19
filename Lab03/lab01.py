@@ -258,7 +258,7 @@ def display_graph(g):
 	plt.ylim([-1.2*number_of_nodes,1.2*number_of_nodes])
 	plt.show()
 
-def display_graph_coloured_sequences(g,node_colors_tab): #used in next labs
+def display_graph_coloured_sequences(g,node_colors_tab): #used in previous labs
 	'''Function displaying graph with colored nodes to user. It is all commented since it will be useful since lab2
 	Arguments:
 		g {networkx.classes.graph.Graph} -- graph object with properly positioned nodes and edges
@@ -282,7 +282,7 @@ def draw_graph(data_matrix,node_colors_tab=None):
 	graph=draw_edges_from_adjacency_matrix(graph,data_matrix)
 	if node_colors_tab == None:
 		display_graph(graph)
-	#else: #else never happens in lab1, we do not want to color anything
+	#else: #else never happens in lab3, we do not want to color anything
 	#	display_graph_coloured_sequences(graph,node_colors_tab)
 
 # ------------------------------THREE FUNCTIONS FOR Lab03 ------------------
