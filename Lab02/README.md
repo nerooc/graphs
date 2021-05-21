@@ -21,7 +21,8 @@ After using this command, the program will ask user to provide sequence to be ch
 
 ## Task 2 - Graph randomization
 
-The program allows user to randomise graph without changing vertices degrees.
+The program allows user to randomise graph without changing vertices degrees by using algorithm with adjacency list to check if there is some edges to mix
+and algorithm with incidence matrix to randomise edges.
 
 ### 2.1 How to run the program
 
