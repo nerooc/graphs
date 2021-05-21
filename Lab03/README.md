@@ -8,12 +8,12 @@
 ### `ALL COMMANDS FROM README SHOULD BE EXECUTED FROM THE Lab03 DIRECTORY`
 
 ## Task 1 - Weighted graph randomization
-The program generates random component graph.
+The program generates random component graph with weights and write it to 'graph.txt' file for other tasks. 
 
 ### 1.1 How to run the program
 
-`python3 task1.py max_vertices_number`
-
+`python3 task1.py [max_vertices_number]`
+max_vertices_number - maximum number of vertices in graph (possitive int)
 
 ## Task 2 - Dijkstra algorithm
 The program allows user to find the shortest paths from the chosen vertex to all the rest inside of a graph generated in [Task 1](#task-1---weighted-graph-randomization). **[INDEXING FROM 0]**
