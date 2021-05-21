@@ -8,7 +8,7 @@ The program allows user to:
 
 In both cases user can supress output by using a flag. In second case it would lead to printing only visual version of a graph and in first case it would lead additionaly to saving the file to `InputFiles/task1_output.txt`. 
 
-###How to run the program
+### How to run the program
 
 `python3 task1.py number_of_vertices probability [-n]`  
 In this case, without using a `-n` flag, user will be shown all of the forms of randomly generated graph, graph will be displayed and saved to `InputFiles/task1_output.txt` for future use.
