@@ -10,7 +10,7 @@ from lab02 import *
 if __name__ == "__main__":
     # # speed test
     # prop = [0.01, 0.2, 0.4, 0.6, 0.8, 0.99]
-    # ver = [20, 100, 300, 500]
+    # ver = [20, 50, 100, 300]
     # arrTime = [[0 for i in range(len(prop))] for row in range(len(ver))]
     # print("Some tests...")
     # for i in range(len(prop)):
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     #         Adjacency_matrix2 = graph_randomization(Adjacency_matrix)
     #         end = time.time()
     #         arrTime[j][i] = end - start
-    #
+    # 
     # print(DataFrame(arrTime))
     # print()
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     #         count += 1
     # print("In graph with 2 possible states probability to stay the same = ", count/100, "%")
 
-    print("This is graph randomization. Path to graph data file should be typed in input args")
+    print("This is graph randomization. Number of mixes and path to graph data file should be typed in input args")
     file_name = 'InputFiles/input.txt'
     mixes_num = 0  # if input will be 0 then function will mix vertices randomly
     if len(sys.argv) == 1:
