@@ -40,14 +40,14 @@ def delete_empty_vertices(adjacency_matrix):
 
 
 def add_int_weights(adjacency_matrix, min_int_weight=1, max_int_weight=10):
-    if adjacency_matrix == 1:
+    if len(adjacency_matrix) == 1:
         return int(random.choice(range(min_int_weight, max_int_weight)))
     for i in range(len(adjacency_matrix)):
         for j in range(i, len(adjacency_matrix[i])):
             if adjacency_matrix[i][j] == 1:
-                adjacency_matrix[i][j] = int(random.choice(range(min_int_weight, max_int_weight)))
+                adjacency_matrix[i][j] = random.choice(range(min_int_weight, max_int_weight))
             else:
-                adjacency_matrix[i][j] = int(0)
+                adjacency_matrix[i][j] = 0
     for i in range(len(adjacency_matrix)):
         for j in range(i):
             adjacency_matrix[i][j] = adjacency_matrix[j][i]
@@ -58,6 +58,7 @@ def add_int_weights(adjacency_matrix, min_int_weight=1, max_int_weight=10):
 def generate_random_graph(max_vertex_num):
     random_probability = random.uniform(0.0, 1.0)
     adjacency_matrix = generate_graph_b(max_vertex_num, random_probability)
+    adjacency_matrix = [list(map(int, adjacency_matrix[i])) for i in range(len(adjacency_matrix))]  # convert to int
     mixed_adjacency_matrix = graph_randomization(adjacency_matrix)
     vertices_in_final_matrix = find_vertices_of_biggest_component(COMPONENTS(mixed_adjacency_matrix))
     if len(vertices_in_final_matrix) < 2:
@@ -78,7 +79,6 @@ def read_graph(file_path):
         print("\nSorry, there is no file called '" + file_path + "'\n")
         exit(-1)
 
-	
 ########################################################################
 
 # task 2 written by Tomasz Gajda
