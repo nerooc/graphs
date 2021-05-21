@@ -16,14 +16,12 @@ if __name__ == "__main__":
         print("\nTEST #1 - Test for < 5 vertices:\n")
         test_graph1 = generate_random_graph(5)
         test_graph1 = add_int_weights(test_graph1)
-        for row in distance_matrix(test_graph1):
-            print(row)
+        pretty_print(distance_matrix(test_graph1))
 
         print("\nTEST #2 - Test for < 30 vertices:\n")
         test_graph2 = generate_random_graph(30)
         test_graph2 = add_int_weights(test_graph2)
-        for row in distance_matrix(test_graph2):
-            print(row)
+        pretty_print(distance_matrix(test_graph2))
 
         sys.exit("End of testing")
     #TESTING###########################################################################

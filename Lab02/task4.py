@@ -9,7 +9,7 @@ import argparse
 import copy as cp
 
 from lab01 import convert_Adjacency_matrix_into_Adjacency_list, draw_graph
-from lab02 import isDegreeSequence, degSeq2adjMat, generate_eulerian, euler_cycle_dfs, euler_cycle_fleury
+from lab02 import generate_eulerian, euler_cycle_dfs, euler_cycle_fleury
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Finding Euler cycle in random Euler Graph (by default with DFS).')

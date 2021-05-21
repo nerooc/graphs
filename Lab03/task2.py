@@ -5,11 +5,9 @@ Script by Tomasz Gajda
 """
 
 import sys
-import copy as cp
 
 from lab01 import draw_graph_with_weights
-from lab03 import dijkstra, print_dijkstra, generate_random_graph, add_int_weights, read_graph
-from random import randrange
+from lab03 import dijkstra, print_dijkstra, read_graph
 
 if __name__ == "__main__": 
 
