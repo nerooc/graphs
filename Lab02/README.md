@@ -26,7 +26,7 @@ The program allows user to randomise graph without changing vertices degrees.
 ### 2.1 How to run the program
 
 `python3 task2.py number_of_mixes path_to_file`
-number_of_mixes - possitive int
+number_of_mixes - possitive int; 
 path_to_file - path to file with correct graph data (from lab01)
 
 ## Task 3 - Graph components
