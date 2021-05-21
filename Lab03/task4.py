@@ -79,7 +79,7 @@ if __name__ == "__main__":
 					print(f"Sorry, file named {file_name} is empty.")
 					exit(-1)
 				try:
-					graph = np.loadtxt(file_name, delimiter=" ")
+					graph = read_graph(file_name)
 					# graph = np.array(matrix)
 					print("For provided input (matrix below):\n\n")
 					pretty_print(graph)
