@@ -18,5 +18,5 @@ if __name__ == '__main__':
     add_weights_digraph(digraph, -5, 40)
     pretty_print(digraph)
     print()
-    print("belman_ford: ", bellman_ford(digraph, source_vertex))
+    print("Bellman-Ford's shortest paths: ", bellman_ford(digraph, source_vertex))
     drawDigraph(array, kosaraju(array))
