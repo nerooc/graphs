@@ -33,7 +33,7 @@ Example:
 ## Task 3 - Random Strongly Connected Components Digraph and Bellman-Ford's algorithm
 
 The program generates random complement digraph 
-and runs Bellman-Ford algorithm on it to find all shortests paths to each vertex starting from chosen vertex.
+and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex starting from chosen vertex.
 
 ### How to run the program
 
