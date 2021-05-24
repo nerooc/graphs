@@ -28,4 +28,17 @@ Example:
 
 ![task2_example.png](./Preview/task2_example.png)
 
+
+
+## Task 3 - Random Strongly Connected Components Digraph and Bellman-Ford's algorithm
+
+The program generates random complement digraph 
+and runs Bellman-Ford algorithm on it to find all shortests paths to each vertex starting from chosen vertex.
+
+### How to run the program
+
+`python3 task3.py [max_vertices_number source_vertex]`
+- max_vertices_number - program will generate digraph with max this number of vertices
+- source_vertex - source for Bellman-Ford
+
 **More info to be added soon**
