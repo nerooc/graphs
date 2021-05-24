@@ -430,3 +430,68 @@ def drawDigraph(G: np.array, components: list):
 	plt.show()
 
 ############################################################################
+
+# task 3 by Karol Szeliga
+
+def generate_real_random_complement_digraph(max_vertices_num):
+    random_probability = random.uniform(0.0, 1.0)
+    adjacency_matrix = generate_random_digraph(max_vertices_num, random_probability)
+    comp = kosaraju(adjacency_matrix)
+    adjacency_matrix = [list(map(int, adjacency_matrix[i])) for i in range(len(adjacency_matrix))]  # map to int
+    if max(comp) == 1:
+        return adjacency_matrix
+    else:
+        return biggest_component(adjacency_matrix, comp)
+
+
+def biggest_component(adjacency_matrix, comp):
+    num_of_big_comp = max(set(comp), key=comp.count)
+    places_of_big_comp = []
+    for place in range(len(comp)):
+        if comp[place] == num_of_big_comp:
+            places_of_big_comp.append(place)
+    final_length = len(places_of_big_comp)
+    component_adjacency_matrix = np.zeros(shape=[final_length, final_length], dtype=int)
+    for i in range(final_length):
+        for j in range(final_length):
+            if adjacency_matrix[places_of_big_comp[i]][places_of_big_comp[j]] == 1:
+                component_adjacency_matrix[i][j] = 1
+    return component_adjacency_matrix
+
+
+def add_weights_digraph(adjacency_matrix, min_rand, max_rand):
+    for i in range(len(adjacency_matrix)):
+        for j in range(len(adjacency_matrix)):
+            if adjacency_matrix[i][j] == 1:
+                adjacency_matrix[i][j] = random.choice(range(min_rand, max_rand))
+    return adjacency_matrix
+
+
+def bellman_ford(digraph, source_vertex):
+    kd = [None for i in range(len(digraph))]
+    pop = [None for i in range(len(digraph))]
+    kd[source_vertex] = 0
+    all_found = True  # fake
+    for i in range(len(digraph)):
+        for row in range(len(digraph)):
+            for col in range(len(digraph)):
+                if digraph[row][col] != 0:
+                    if kd[col] is None:
+                        if kd[row] is not None:
+                            kd[col] = kd[row] + digraph[row][col]
+                            all_found = False
+                    elif kd[row] is not None:
+                        if kd[col] > kd[row] + digraph[row][col]:
+                            kd[col] = kd[row] + digraph[row][col]
+                            pop[col] = row
+                            all_found = False
+        if all_found:
+            break
+        else:
+            if i == len(digraph)-1:
+                print("[bellman_ford: this graph has negative cycle, shortest paths cannot be found]")
+        all_found = True  # fake
+    return kd
+
+
+############################################################################
