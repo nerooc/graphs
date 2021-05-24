@@ -5,10 +5,10 @@ import sys
 
 if __name__ == '__main__':
     print("This program generates random complement digraph.\nIn input args set max vertices number and source vertex for bellman_ford")
-    max_vertices_num = 5
+    max_vertices_num = 7
     source_vertex = 0
-    if len(sys.argv) != 2:
-        print("No input in program args, max_vertices_num = 5, source_vertex = 0")
+    if len(sys.argv) != 3:
+        print("No input in program args, max_vertices_num = 7, source_vertex = 0")
     else:
         max_vertices_num = int(sys.argv[1])
         source_vertex = int(sys.argv[2])
