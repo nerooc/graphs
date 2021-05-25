@@ -51,10 +51,10 @@ The number of components in this graph: 4
 The program generates random complement digraph 
 and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex starting from chosen vertex.
 
-### How to run the program
+### 3.1 How to run the program
 
 `python3 task3.py [max_vertices_number source_vertex]`
 - max_vertices_number - program will generate digraph with max this number of vertices
 - source_vertex - source for Bellman-Ford
 
-**More info to be added soon**
+***More info to be added soon***
