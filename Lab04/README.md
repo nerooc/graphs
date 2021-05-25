@@ -22,7 +22,7 @@ When `-n` flag is used, the same thing will happen except for showing other form
 
 ## Task 2 - Strongly Connected Components
 
-The program allows the user to find strongly connected components in digraph using Kosaraju algorithm and coloring up to 13 different components (when that number is exceeded, program displays warning that components will not be presented graphically (with colors).
+The program allows the user to find strongly connected components in digraph using Kosaraju algorithm and coloring up to 13 different components (when that number is exceeded, program displays warning that components will not be presented graphically (with colors)).
 
 ### 2.1 How to run the program
 
