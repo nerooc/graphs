@@ -322,7 +322,7 @@ def drawDigraph(G: np.array, components: list):
 
 	print('The number of components in this graph:', max(components))
 	if max(components) > 13:
-		print("WARNING: Components number exceeded a limit for coloring mode")
+		print(f"WARNING: Components number exceeded a limit for coloring mode ({max(components)} > 13)")
 		pos = nx.circular_layout(DG)
 		nx.draw(DG, pos, with_labels=True, node_size=800)
 	else:

@@ -29,6 +29,13 @@ if __name__ == '__main__':
 		try:
 			G = np.loadtxt(file_name, delimiter=" ")
 			comp = kosaraju(G)
+			#printing vertices for every component
+			for c in set(comp):
+				print(f"Component number {c} - vertices:", end = ' ')
+				for i in range(len(comp)):
+					if comp[i] == c:
+						print(i,end = '  ')
+				print()
 			drawDigraph(G, comp)
 		except ValueError:
 			print(f"{file_name} contains incorrect data (probaly not separated by spaces)")
