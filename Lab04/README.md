@@ -28,7 +28,7 @@ The program allows the user to find strongly connected components in digraph usi
 
 `python3 task2.py <path to file>`
 
-where `path to file>` contains location of adjacency matrix representing digraph 
+where `<path to file>` contains location of adjacency matrix representing digraph 
 
 ### 2.2 Example:
 
