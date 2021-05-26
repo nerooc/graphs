@@ -57,4 +57,28 @@ and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex 
 - max_vertices_number - program will generate digraph with max this number of vertices
 - source_vertex - source for Bellman-Ford
 
-***More info to be added soon***
+## Task 4 - Johnson's algorithm
+ 
+The program allows user to generate a distance matrix between each two vertices, that works on digraphs that are both positively and negatively weighted.
+ 
+### 4.1 How to run the program
+ 
+`python3 task4.py [max_vertices_number]`
+ 
+Where:
+- `[max_vertices_num]` is the maximum amount of vertices that could be generated in the digraph
+ 
+### 4.2 Testing
+ 
+`python3 task4.py test`
+ 
+The tests contain the function calls for:
+ 
+- **#1 - Hardcoded matrix**, <br/>
+```
+0  0  3  0  1
+1  0  1 -1  1
+1  0  0  0  1
+0  0  0  0  0
+0  1  0  1  0
+```
