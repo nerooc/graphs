@@ -550,14 +550,14 @@ def draw_hamilton(g_am: list, cycle: list):
     plt.show()
 
 def pretty_print(matrix: list):
-    '''Function printing array in a way that is compatible with previous functions 
-    of ours.
+    '''Function printing array in a way that is compatible with previous functions of ours.
+    CAUTION: We assume elements of these matrices cannot be 3 and more digit long
 
     Arguments:
         matrix {list} -- matrix to be printed
     '''
     if matrix is not None:
-        print('\n'.join(['\t'.join([str(int(cell)) for cell in row]) for row in matrix]))
+        print('\n'.join([' '.join([str((cell))+(2-len(str((cell))))*' ' for cell in row]) for row in matrix]))
     else:
         raise Exception("Matrix is empty.")
  

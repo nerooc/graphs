@@ -216,12 +216,13 @@ def generate_random_digraph(num_of_vertices, probability):
 
 def pretty_print_adjacency_list(adj_list):
 	"""Function that prints adjacency list in a more readible way
+	CAUTION: we assume elements of this matrix CANNOT BE 3 and more digit long.
 
 	Arguments:
 		adj_list {list} - adjacency list representation of the graph
 	"""
 	if adj_list is not None:
-		print('\n'.join([str(index)+".\t"+'\t'.join([str(int(cell)) for cell in row]) for index,row in enumerate(adj_list,start=1)]))
+		print('\n'.join([str(index)+".\t"+' '.join([str((cell))+(2-len(str((cell))))*' ' for cell in row]) for index,row in enumerate(adj_list,start=1)]))
 	else:
 		raise Exception("Adjacency list is empty.")
 
