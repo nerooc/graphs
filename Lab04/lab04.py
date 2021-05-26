@@ -1,7 +1,10 @@
 import networkx as nx
 import numpy as np
+import copy as cp
 import matplotlib.pyplot as plt
 import random
+import math
+from lab03 import distance_matrix
 
 
 #task1 written by Piotr Matiaszewski
@@ -402,5 +405,117 @@ def bellman_ford(digraph, source_vertex):
         all_found = True  # fake
     return kd
 
+
+############################################################################
+
+# task 4 by Tomasz Gajda
+
+def pretty_print_w_inf(matrix: list) -> None:
+    '''Modified pretty print accepting inf values.
+
+    Arguments:
+        matrix {list} -- matrix to be printed
+    '''
+    if matrix is not None:
+        print('\n'.join(['\t'.join([str(cell) for cell in row]) for row in matrix]))
+    else:
+        raise Exception("Matrix is empty.")
+
+def swap_zero_to_n(graph: list) -> list:
+    '''Function swapping all the zeroes to 'N' characters, to be able to
+    differentiate weight of 0 and lack of directed edge
+
+	Arguments:
+		graph {list} -- adjacency matrix of a graph
+
+    Returns:
+		graph_n {list} -- input matrix with zeroes changed to 'N'
+	'''
+    graph_n = graph
+
+    for r_i, r in enumerate(graph_n):
+        for c_i, c in enumerate(r):
+            if c == 0:
+                graph_n[r_i][c_i] = 'N'
+    return graph_n
+
+def add_s(graph: list) -> list:
+    '''Function adding a new vertex that is connected
+    with all the others.
+
+	Arguments:
+		graph {list} -- adjacency matrix of a graph
+
+    Returns:
+		graph_n {list} -- input matrix with additional 's' vertex
+	'''
+    size = len(graph)
+    graph_tmp = cp.deepcopy(graph)
+    new_row = [0 for _ in range(size)]
+    new_row.append('N')
+    graph_tmp.append(new_row)
+
+    for r in range(size):
+        graph_tmp[r].append('N')
+
+    return graph_tmp
+
+def bellman_ford_2(graph: list, v_start: int) -> tuple:
+    '''Function using Bellman-Ford algorithm to check if the graph contains
+    a negative weight cycle, or return a list of shortest path from the new S vertex
+
+	Arguments:
+		graph {list} -- adjacency matrix of a graph
+        v_start {int} -- index of starting vertex
+
+    Returns:
+		path_costs -- list of costs for each vertex in the graph
+		predecessors -- predecessors of all vertices
+	'''
+    size = len(graph)
+    distances = [math.inf for _ in range(size)]
+    predecessors = [None for _ in range(size)]
+    distances[v_start] = 0
+
+    for _ in range(size - 1):
+        for r_i in range(size):
+            for c_i in range(size):
+                if graph[r_i][c_i] != 'N':
+                    if distances[r_i] + graph[r_i][c_i] < distances[c_i]:
+                        distances[c_i] = distances[r_i] + graph[r_i][c_i]
+                        predecessors[c_i] = r_i
+
+    for r_i in range(size):
+        for c_i in range(size):
+            if graph[r_i][c_i] != 'N':
+                if distances[r_i] + graph[r_i][c_i] < distances[c_i]:
+                    raise Exception("Graph contains a negative weight cycle!")
+    
+    return distances, predecessors
+
+def johnson(graph: list) -> list:
+    '''Function using Johnson's algorithm to create a distance matrix safely, 
+    while using both positive and negative weights
+
+	Arguments:
+		graph {list} -- adjacency matrix of a graph
+
+    Returns:
+		d_m -- distance matrix of a given graph
+	'''
+    graph = swap_zero_to_n(graph)
+    graph_p = add_s(graph)
+    weights, _ = bellman_ford_2(graph_p, len(graph))
+    size = len(graph)
+    for r_i in range(size):
+        for c_i in range(size):
+            if graph[r_i][c_i] != 'N':
+                graph[r_i][c_i] = graph[r_i][c_i] + weights[r_i] - weights[c_i]
+    d_m = distance_matrix(graph)
+    for r_i in range(size):
+        for c_i in range(size):
+            d_m[r_i][c_i] = d_m[r_i][c_i] - weights[r_i] + weights[c_i]
+    
+    return d_m
 
 ############################################################################
