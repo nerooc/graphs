@@ -13,4 +13,4 @@ The program allows user to :
 
 where:
 - `LAYERS` is required integer argument representing number of middle layers (without first layer - source, and the last one - sink) of a flow net
-- `VERTICES_NUMBERS` is optional list argument containing numbers of vertices corresponding to number of vertices in each of middle layer. Unless provided, program will randomly generate number of vertices in each of middle layer.
+- `VERTICES_NUMBERS` is optional list argument containing numbers of vertices corresponding to number of vertices in each of middle layers. Unless provided, program will randomly generate number of vertices in each of middle layers.
