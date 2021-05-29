@@ -20,9 +20,9 @@ where:
 Assume one wants to generate net containing 5 layers (3 middle layers).
 Every layer will have following number of vertices:
 - first layer - 1 vertex (***source***)
-- second layer - 3 vertices
-- third layer - 2 vertices
-- fourth layer - 3 vertices
+- second layer - 3 vertices (first middle layer)
+- third layer - 2 vertices (second middle layer)
+- fourth layer - 3 vertices (third middle layer)
 - fifth layer - 1 vertex (***sink***).
 
 Using command: `python3 task1.py -l 3 -vn 3 2 3` will create image shown below:
@@ -45,9 +45,13 @@ and following output:
 0  0  0  0  0  0  0  0  0  0
 ```
 
-The black edges are those generated first - for connecting all vertices so that each vertex of *i*-layer **would start at least 1 edge and end at least 1 edge** in layer *i+1*. This ensures that there will be path leading from every vertex to the sink. Black numbers next to them are their capacities.
+The black edges are those generated first - for connecting all vertices so that **each vertex of *i*-layer would start at least 1 edge and end at least 1 edge in layer *i+1***. This ensures that there will be path leading from every vertex to the sink. 
+
+Black numbers next to them are their capacities.
 
 The blue edges are the *2\*N* (*N* is number of middle layers) edges added 'randomly' 
-(maintaining the conditions resulting from the definition of the flow network such as: no loops, no edge that is multiple or opposite to the existing one, no edge entering source or leaving sink). Blue numbers next to them are their capacities.
+(maintaining the conditions resulting from the definition of the flow network such as: ***no loops, no edge that is multiple or opposite to the existing one, no edge entering source or leaving sink***). 
+
+Blue numbers next to them are their capacities.
 
 It is worth notice that the middle layers are those without the first (source - represented by the vertex 1) and the last (sink - represented by the vertex 10) one.
