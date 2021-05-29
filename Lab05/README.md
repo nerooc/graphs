@@ -15,9 +15,18 @@ where:
 - `LAYERS` is required integer argument representing number of middle layers (without first layer - source, and the last one - sink) of a flow net
 - `VERTICES_NUMBERS` is optional list argument containing numbers of vertices corresponding to number of vertices in each of middle layers. Unless provided, program will randomly generate number of vertices in each of middle layers.
 
-### 1.2 Example
+### 1.2 Example and elucidation
 
-Using command : `python3 task1.py -l 3 -vn 3 2 3` will create image shown below:
+Assume one wants to generate net containing 5 layers (3 middle layers).
+Every layer will have following number of vertices:
+- first layer - 1 vertex (***source***)
+- second layer - 3 vertices
+- third layer - 2 vertices
+- fourth layer - 3 vertices
+- fifth layer - 1 vertex (***sink***).
+
+Using command: `python3 task1.py -l 3 -vn 3 2 3` will create image shown below:
+
 ![task1_example](Preview/task1.png)
 
 and following output:
