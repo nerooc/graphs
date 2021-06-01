@@ -63,22 +63,27 @@ The program allows user to generate a distance matrix between each two vertices,
  
 ### 4.1 How to run the program
  
+- Generating a digraph:
 `python3 task4.py [max_vertices_number]`
- 
+
+- Receiving digraph from a file:
+`python3 task4.py -f <path to file>`
+
 Where:
-- `[max_vertices_num]` is the maximum amount of vertices that could be generated in the digraph
- 
+- `[max_vertices_num]` is the maximum amount of vertices that could be generated in the digraph,
+- `<path to file>` is the path to the file containing digraph in form of a weighted matrix
+
 ### 4.2 Testing
  
 `python3 task4.py test`
  
-The tests contain the function calls for:
+The test contains the function calls for:
  
 - **#1 - Hardcoded matrix**, <br/>
 ```
-0  0  3  0  1
-1  0  1 -1  1
-1  0  0  0  1
-0  0  0  0  0
-0  1  0  1  0
+.  .  3  .  1
+1  .  1 -1  1
+1  0  .  .  1
+.  .  .  .  0
+.  1  ,  1  0
 ```
