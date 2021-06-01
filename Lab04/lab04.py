@@ -380,7 +380,10 @@ def add_weights_digraph(adjacency_matrix, min_rand, max_rand):
     return adjacency_matrix
 
 
-def bellman_ford(digraph, source_vertex):
+def bellman_ford(digraph, source_vertex, display = False):
+    if len(digraph) <= source_vertex:
+        print("[bellman_ford: generated graph has less vertices than source_vertex number]")
+        return [0], [0]
     kd = [None for i in range(len(digraph))]
     pop = [None for i in range(len(digraph))]
     kd[source_vertex] = 0
@@ -392,6 +395,7 @@ def bellman_ford(digraph, source_vertex):
                     if kd[col] is None:
                         if kd[row] is not None:
                             kd[col] = kd[row] + digraph[row][col]
+                            pop[col] = row
                             all_found = False
                     elif kd[row] is not None:
                         if kd[col] > kd[row] + digraph[row][col]:
@@ -403,8 +407,34 @@ def bellman_ford(digraph, source_vertex):
         else:
             if i == len(digraph)-1:
                 print("[bellman_ford: this graph has negative cycle, shortest paths cannot be found]")
+                return [0], [0]
         all_found = True  # fake
-    return kd
+    if display:
+        print("Bellman-Ford's shortest paths costs: ", kd)
+        show_shortest_paths(kd, pop, source_vertex)
+    return kd, pop
+
+
+def show_shortest_paths(kd, pop, source_vertex):
+    print("Shortest paths from vertex: ", source_vertex)
+    path_list = []
+    no_paths = True
+    for i in range(len(pop)):
+        if pop[i] is not None:
+            no_paths = False
+            path_list = [i]
+            temp_ver = pop[i]
+            while temp_ver is not None:
+                path_list.append(temp_ver)
+                temp_ver = pop[temp_ver]
+            path_list.reverse()
+            print(path_list[0], end="")
+            path_list.pop(0)
+            for ver in path_list:
+                print(" ->", ver, end="")
+            print(" ("+str(kd[i])+")")
+    if no_paths:
+        print("There is no path to show")
 
 
 ############################################################################
