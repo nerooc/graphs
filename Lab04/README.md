@@ -96,5 +96,5 @@ The test contains the function calls for:
 1  .  1 -1  1
 1  0  .  .  1
 .  .  .  .  0
-.  1  ,  1  0
+.  1  .  1  0
 ```
