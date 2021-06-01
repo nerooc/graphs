@@ -62,16 +62,20 @@ and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex 
 The program allows user to generate a distance matrix between each two vertices, that works on digraphs that are both positively and negatively weighted.
  
 ### 4.1 How to run the program
- 
-- Generating a digraph:
+
+The command depends on whether you want to: 
+
+- Generate a digraph:
+
 `python3 task4.py [max_vertices_number]`
 
-- Receiving digraph from a file:
+- Import a digraph from file:
+
 `python3 task4.py -f <path to file>`
 
 Where:
 - `[max_vertices_num]` is the maximum amount of vertices that could be generated in the digraph,
-- `<path to file>` is the path to the file containing digraph in form of a weighted matrix
+- `<path to file>` is the path to the file containing digraph in form of a [weighted matrix](https://github.com/nerooc/graphs/blob/main/Lab04/InputFiles/johnson_test.txt) where **dots** represent no edge between vertices.
 
 ### 4.2 Testing
  
