@@ -27,7 +27,9 @@ and algorithm with incidence matrix to randomise edges.
 ### 2.1 How to run the program
 
 `python3 task2.py number_of_mixes path_to_file`
-number_of_mixes - possitive int; 
+
+number_of_mixes - (possitive int) parameter for randomization algorithm, tells how many times algorithm will swap random pair of edges (pair with correct relation)
+
 path_to_file - path to file with correct graph data (from lab01)
 
 ## Task 3 - Graph components
