@@ -422,22 +422,22 @@ def pretty_print_w_inf(matrix: list) -> None:
     else:
         raise Exception("Matrix is empty.")
 
-def swap_zero_to_n(graph: list) -> list:
-    '''Function swapping all the zeroes to 'N' characters, to be able to
+def swap_zero_to_dot(graph: list) -> list:
+    '''Function swapping all the zeroes to '.' characters, to be able to
     differentiate weight of 0 and lack of directed edge
 
 	Arguments:
 		graph {list} -- adjacency matrix of a graph
 
     Returns:
-		graph_n {list} -- input matrix with zeroes changed to 'N'
+		graph_n {list} -- input matrix with zeroes changed to '.'
 	'''
     graph_n = graph
 
     for r_i, r in enumerate(graph_n):
         for c_i, c in enumerate(r):
             if c == 0:
-                graph_n[r_i][c_i] = 'N'
+                graph_n[r_i][c_i] = '.'
     return graph_n
 
 def add_s(graph: list) -> list:
@@ -453,11 +453,11 @@ def add_s(graph: list) -> list:
     size = len(graph)
     graph_tmp = cp.deepcopy(graph)
     new_row = [0 for _ in range(size)]
-    new_row.append('N')
+    new_row.append('.')
     graph_tmp.append(new_row)
 
     for r in range(size):
-        graph_tmp[r].append('N')
+        graph_tmp[r].append('.')
 
     return graph_tmp
 
@@ -481,14 +481,14 @@ def bellman_ford_2(graph: list, v_start: int) -> tuple:
     for _ in range(size - 1):
         for r_i in range(size):
             for c_i in range(size):
-                if graph[r_i][c_i] != 'N':
+                if graph[r_i][c_i] != '.':
                     if distances[r_i] + graph[r_i][c_i] < distances[c_i]:
                         distances[c_i] = distances[r_i] + graph[r_i][c_i]
                         predecessors[c_i] = r_i
 
     for r_i in range(size):
         for c_i in range(size):
-            if graph[r_i][c_i] != 'N':
+            if graph[r_i][c_i] != '.':
                 if distances[r_i] + graph[r_i][c_i] < distances[c_i]:
                     raise Exception("Graph contains a negative weight cycle!")
     
@@ -504,13 +504,12 @@ def johnson(graph: list) -> list:
     Returns:
 		d_m -- distance matrix of a given graph
 	'''
-    graph = swap_zero_to_n(graph)
     graph_p = add_s(graph)
     weights, _ = bellman_ford_2(graph_p, len(graph))
     size = len(graph)
     for r_i in range(size):
         for c_i in range(size):
-            if graph[r_i][c_i] != 'N':
+            if graph[r_i][c_i] != '.':
                 graph[r_i][c_i] = graph[r_i][c_i] + weights[r_i] - weights[c_i]
     d_m = distance_matrix(graph)
     for r_i in range(size):

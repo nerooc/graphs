@@ -14,7 +14,6 @@ from lab02 import generate_eulerian, euler_cycle_dfs, euler_cycle_fleury
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Finding Euler cycle in random Euler Graph (by default with DFS).')
     parser.add_argument('-f', action='store_true', help='using different algorithm (Fleury)')
-    # parser.add_argument('-test', action='store_true', help='using different algorithm (Fleury)')
     parser.add_argument('number_of_vertices', metavar='number_of_vertices/test', help='amount of vertices in the graph/turn on testing')
 
     args = parser.parse_args()

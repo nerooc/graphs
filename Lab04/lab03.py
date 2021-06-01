@@ -97,7 +97,7 @@ def get_neighbours(graph: list, v: int) -> list:
 	neighbours = []
 	
 	for i in range(rank):
-		if graph[v][i] != 'N':
+		if graph[v][i] != '.':
 			neighbours.append(i)
 	
 	return neighbours
