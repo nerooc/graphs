@@ -373,14 +373,17 @@ def biggest_component(adjacency_matrix, comp):
 
 
 def add_weights_digraph(adjacency_matrix, min_rand, max_rand):
+    adjacency_matrix = [list(map(str, adjacency_matrix[i])) for i in range(len(adjacency_matrix))]  # map to int
     for i in range(len(adjacency_matrix)):
         for j in range(len(adjacency_matrix)):
-            if adjacency_matrix[i][j] == 1:
+            if adjacency_matrix[i][j] == '1':
                 adjacency_matrix[i][j] = random.choice(range(min_rand, max_rand))
+            else:
+                adjacency_matrix[i][j] = '.'
     return adjacency_matrix
 
 
-def bellman_ford(digraph, source_vertex, display = False):
+def bellman_ford(digraph, source_vertex, display=False):
     if len(digraph) <= source_vertex:
         print("[bellman_ford: generated graph has less vertices than source_vertex number]")
         return [0], [0]
@@ -391,21 +394,21 @@ def bellman_ford(digraph, source_vertex, display = False):
     for i in range(len(digraph)):
         for row in range(len(digraph)):
             for col in range(len(digraph)):
-                if digraph[row][col] != 0:
+                if digraph[row][col] != '.':
                     if kd[col] is None:
                         if kd[row] is not None:
-                            kd[col] = kd[row] + digraph[row][col]
+                            kd[col] = kd[row] + int(digraph[row][col])
                             pop[col] = row
                             all_found = False
                     elif kd[row] is not None:
-                        if kd[col] > kd[row] + digraph[row][col]:
-                            kd[col] = kd[row] + digraph[row][col]
+                        if kd[col] > kd[row] + int(digraph[row][col]):
+                            kd[col] = kd[row] + int(digraph[row][col])
                             pop[col] = row
                             all_found = False
         if all_found:
             break
         else:
-            if i == len(digraph)-1:
+            if i == len(digraph) - 1:
                 print("[bellman_ford: this graph has negative cycle, shortest paths cannot be found]")
                 return [0], [0]
         all_found = True  # fake
@@ -432,10 +435,27 @@ def show_shortest_paths(kd, pop, source_vertex):
             path_list.pop(0)
             for ver in path_list:
                 print(" ->", ver, end="")
-            print(" ("+str(kd[i])+")")
+            print(" (" + str(kd[i]) + ")")
     if no_paths:
         print("There is no path to show")
 
+
+def conv_str_to_0_1(digraph_with_weights):
+    digraph = digraph_with_weights
+    for i in range(len(digraph)):
+        for j in range(len(digraph[0])):
+            if digraph[i][j] != '0':
+                digraph[i][j] = '1'
+            if digraph[i][j] == '.':
+                digraph[i][j] == '0'
+    digraph = [list(map(int, digraph[i])) for i in range(len(digraph))]
+    digraph = np.array(digraph)
+    for i in range(len(digraph)):
+        for j in range(len(digraph[0])):
+            if digraph[i][j] != 0:
+                digraph[i][j] = 1
+
+    return digraph
 
 ############################################################################
 
