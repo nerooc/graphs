@@ -56,7 +56,7 @@ and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex 
 `python3 task3.py [max_vertices_number source_vertex]`
 
 - max_vertices_number - program will generate digraph with max this number of vertices
-- source_vertex - source for Bellman-Ford
+- source_vertex - source for Bellman-Ford (0 is first vertex)
 
 or
 
