@@ -13,7 +13,7 @@ from lab04 import *
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Using Johnson\'s algorithm to find the distance matrix of a graph')
     parser.add_argument('-f', action='store_true', help='load graph from external file')
-    parser.add_argument('number_of_vertices', metavar='number_of_vertices/file_name/test', help='amount of vertices in the graph/name of the file containing graph/turn on testing')
+    parser.add_argument('number_of_vertices', metavar='number_of_vertices/file_name/test', help='amount of vertices in the graph/path to the file containing digraph/turn on testing')
 
     args = parser.parse_args()
     
