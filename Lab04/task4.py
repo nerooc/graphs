@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     #TESTING###########################################################################
     if(n == "test"):
-        print("\nTEST #1 - Test for hardcoded graph:\n")
+        print("\nTEST #1 - Test for hardcoded digraph:\n")
         graph = [['.', '.', 3, '.', 1], [1, '.', 1, -1, 1], [1, 0, '.', '.', -1], ['.', '.', '.', '.', '.'], ['.', 1, '.', 1, '.']]
         pretty_print_w_inf(graph)
         graph_cp = cp.deepcopy(graph)
@@ -60,8 +60,7 @@ if __name__ == "__main__":
         digraph_cp = cp.deepcopy(digraph)
         digraph = swap_zero_to_dot(digraph)
 
-        add_weights_digraph(digraph, -5, 10)
-
+        digraph = add_weights_digraph(digraph, -5, 10)
 
         pretty_print_w_inf(digraph)
         print()
