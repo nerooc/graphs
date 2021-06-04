@@ -82,7 +82,8 @@ The command depends on whether you want to:
 
 Where:
 - `[max_vertices_num]` is the maximum amount of vertices that could be generated in the digraph,
-- `<path to file>` is the path to the file containing digraph in form of a [weighted matrix](https://github.com/nerooc/graphs/blob/main/Lab04/InputFiles/johnson_test.txt) where **dots** represent no edge between vertices.
+- `<path to file>` is the path to the file containing digraph in form of a [weighted matrix](https://github.com/nerooc/graphs/blob/main/Lab04/InputFiles/johnson_test.txt) where **dots** represent no edge between vertices,
+- `-f` is a flag stating whether we are using a graph imported from a file or a generated one
 
 ### 4.2 Testing
  
