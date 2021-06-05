@@ -447,7 +447,7 @@ def conv_str_to_0_1(digraph_with_weights):
             if digraph[i][j] == '0':
                 digraph[i][j] = '1'
             if digraph[i][j] == '.':
-                digraph[i][j] == '0'
+                digraph[i][j] = '0'
     digraph = [list(map(int, digraph[i])) for i in range(len(digraph))]
     digraph = np.array(digraph)
     for i in range(len(digraph)):
