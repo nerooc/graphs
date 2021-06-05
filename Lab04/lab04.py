@@ -444,7 +444,7 @@ def conv_str_to_0_1(digraph_with_weights):
     digraph = digraph_with_weights
     for i in range(len(digraph)):
         for j in range(len(digraph[0])):
-            if digraph[i][j] != '0':
+            if digraph[i][j] == '0':
                 digraph[i][j] = '1'
             if digraph[i][j] == '.':
                 digraph[i][j] == '0'
