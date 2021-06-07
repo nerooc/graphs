@@ -41,7 +41,7 @@ def isDegreeSequence(List_org: list):
 
 # task 2 by Karol Szeliga
 
-def graph_randomization(adjacency_matrix, mixes_number = 0, print_info = False):
+def graph_randomization(adjacency_matrix, mixes_number=0, print_info=False):
     """
     :param adjacency_matrix:
     :return: randomised adjacency_matrix without changing vertices degrees
@@ -49,7 +49,7 @@ def graph_randomization(adjacency_matrix, mixes_number = 0, print_info = False):
     # some explanation
     # algorithm mixes edges in graph without changing vertex degrees
 
-    #using adjacency list it finds out if there is any edges to mix by:
+    # using adjacency list it finds out if there is any edges to mix by:
     # finding randomly 4 vertices (A,B,C,D) with:
     #     1. edges between A-B and C-D
     #     2. not edges between A..C and B..D
@@ -160,6 +160,7 @@ def graph_randomization(adjacency_matrix, mixes_number = 0, print_info = False):
                 print("[mixes number set randomly]")
             mixes_number = set_mixes_number(len(adjacency_list))
         mixes = 0
+        m = 0
         while mixes < mixes_number:
             pair = random.sample(range(len(incidence_matrix[0])), 2)
             AB_nums = [0, 0]
@@ -173,18 +174,44 @@ def graph_randomization(adjacency_matrix, mixes_number = 0, print_info = False):
                 if incidence_matrix[i][pair[1]] == 1:
                     CD_nums[next2] = i
                     next2 += 1
-            if incidence_matrix[CD_nums[0]][pair[0]] == 0 and incidence_matrix[AB_nums[1]][pair[1]] == 0:
+
+            if incidence_matrix[CD_nums[0]][pair[0]] != 1 and incidence_matrix[AB_nums[1]][pair[1]] != 1:
                 incidence_matrix[CD_nums[0]][pair[0]] = 1
                 incidence_matrix[AB_nums[1]][pair[1]] = 1
                 incidence_matrix[AB_nums[1]][pair[0]] = 0
                 incidence_matrix[CD_nums[0]][pair[1]] = 0
                 mixes += 1
+                if if_edge_is_double(incidence_matrix):
+                    incidence_matrix[CD_nums[0]][pair[0]] = 0
+                    incidence_matrix[AB_nums[1]][pair[1]] = 0
+                    incidence_matrix[AB_nums[1]][pair[0]] = 1
+                    incidence_matrix[CD_nums[0]][pair[1]] = 1
+                    mixes -= 1
 
     if work_on_complement:
+        pretty_print(incidence_matrix)
         randomized_adjacency_matrix = graph_complement(convert_Incidence_matrix_into_Adjacency_matrix(incidence_matrix))
     else:
+        pretty_print(incidence_matrix)
         randomized_adjacency_matrix = convert_Incidence_matrix_into_Adjacency_matrix(incidence_matrix)
     return randomized_adjacency_matrix
+
+
+def if_edge_is_double(inc_mat):
+    for col in range(len(inc_mat[0])):
+        a = -1
+        b = -1
+        for row in range(len(inc_mat)):
+            if inc_mat[row][col] == 1:
+                if a == -1:
+                    a = row
+                else:
+                    b = row
+        for col2 in range(len(inc_mat[0])):
+            if col != col2:
+                if inc_mat[a][col2] == 1 and inc_mat[b][col2] == 1:
+                    return True
+    return False
 
 
 def count_edges(adjacency_matrix):
@@ -200,7 +227,7 @@ def set_mixes_number(length):
     if length % 2 == 0:
         return random.choice(range(int(length / 2), length))
     else:
-        return random.choice(range(int(length / 2), length+1))
+        return random.choice(range(int(length / 2), length + 1))
 
 
 def set_opposite(cell):
@@ -226,18 +253,18 @@ def display_graphs(g1, g2, name1='graph 1', name2='graph 2'):
     pos2 = nx.get_node_attributes(g2, 'pos')
     fig, axes = plt.subplots(1, 2)
     ax = axes.flatten()
-    nx.draw(g1, pos1, node_size=10000/len(pos1), with_labels=True, ax=ax[0])
+    nx.draw(g1, pos1, node_size=10000 / len(pos1), with_labels=True, ax=ax[0])
     ax[0].set_title(name1)
     ax[0].set_axis_off()
     ax[0].axis('square')
-    nx.draw(g2, pos2, node_size=10000/len(pos2), with_labels=True, ax=ax[1])
+    nx.draw(g2, pos2, node_size=10000 / len(pos2), with_labels=True, ax=ax[1])
     ax[1].set_title(name2)
     ax[1].set_axis_off()
     ax[1].axis('square')
     plt.show()
 
 
-def draw_two_graphs(data_matrix1, data_matrix2, name1 = 'graph 1', name2 = 'graph 2'):
+def draw_two_graphs(data_matrix1, data_matrix2, name1='graph 1', name2='graph 2'):
     ''' "Main" function calling other functions in order to draw graph. Depending on the second argument graph will have colored nodes or not
     Arguments:
         data_matrix {list} -- adjacency matrix representation of graph
@@ -650,7 +677,7 @@ def pretty_print(matrix: list):
         matrix {list} -- matrix to be printed
     '''
     if matrix is not None:
-        print('\n'.join(['\t'.join([str(cell) for cell in row]) for row in matrix]))
+        print('\n'.join(['\t'.join([str(int(cell)) for cell in row]) for row in matrix]))
     else:
         raise Exception("Matrix is empty.")
  
