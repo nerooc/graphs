@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import random
 import math
+
 from lab02 import pretty_print
 
 #task1 written by Piotr Matiaszewski and Bartosz Rogowski
@@ -290,3 +291,68 @@ def display_flow_net(G_org: nx.DiGraph, pos):
 	ax = plt
 	ax.axis('off')
 	plt.show()
+
+#task2
+
+def bfs(digraph: list, start_v: int, target_v: int, predecessors: list) -> bool:
+    """
+	Function implementing BFS algorithm to check if path to the target vertex exists
+
+	Arguments:
+		digraph {list} -- matrix representing input network
+        start_v {int} -- starting vertex index
+        target_v {int} -- target vertex index
+	
+	Returns:
+		was_visited {bool} -- boolean variable stating if our target vertex was visited
+	"""
+    visited = [False for _ in range(len(digraph))]
+    queue = []
+    queue.append(start_v)
+
+    visited[start_v] = True
+
+    while queue:
+        v = queue.pop(0)
+        
+        for i, val in enumerate(digraph[v]):
+            if visited[i] is False and val > 0:
+                queue.append(i)
+                visited[i] = True
+                predecessors[i] = v
+
+    return visited[target_v]
+
+def ford_fulkerson(digraph: list, source: int, sink: int) -> int:
+    """
+	Function using Ford-Fulkerson algorithm to find the max flow of the network
+
+	Arguments:
+		digraph {list} -- matrix representing input network
+		source {int} -- source vertex
+        sink {int} -- sink vertex
+
+    Returns:
+		max_flow {int} -- max flow of the input network
+	"""
+    residual_network = cp.deepcopy(digraph)
+    predecessors = [-1 for _ in range(len(digraph))]
+    result = 0
+
+    while bfs(residual_network, source, sink, predecessors):
+        tmp_flow = math.inf
+        
+        v = sink
+        while v != source:
+            tmp_flow = min(tmp_flow, residual_network[predecessors[v]][v])
+            v = predecessors[v]
+        result += tmp_flow
+
+        v = sink
+        while v != source:
+            u = predecessors[v]
+            residual_network[u][v] -= tmp_flow
+            residual_network[v][u] += tmp_flow
+            v = predecessors[v]
+    
+    return result
