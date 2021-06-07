@@ -55,3 +55,36 @@ The blue edges are the *2\*N* (*N* is number of middle layers) edges added 'rand
 Blue numbers next to them are their capacities.
 
 It is worth notice that the middle layers are those without the first (source - represented by the vertex 1) and the last (sink - represented by the vertex 10) one.
+
+## Task 2 - Ford–Fulkerson algorithm
+
+The program allows user to find the maximum flow in a flow network imported from a file.
+
+### 2.1 How to run the program
+
+`python3 task2.py <path to file>`
+
+Where:
+- `<path to file>` is the path to the file containing the flow network generated in Task 1
+
+### 2.2 Testing
+
+`python3 task2.py test`
+
+The test contains the function calls for:
+
+- **#1 - Hardcoded matrix**, based on the exemplary input graph <br/>
+```
+0  10   3   6   0   0   0   0   0   0   0  
+0   0   8   0   8   6   0   0   0   0   0  
+0   0   0   0   0   2  10   0   0   0   0  
+0   0   0   0   9   0   1   0   0   0   0  
+0   0   0   0   0   0   0   0   5   0   0  
+0   0   0   0   1   0   0   0   0   7   0  
+0   0   0   0   0   0   0   9   0   0   0  
+0   0   0   0   0   0   0   0   0   0   7  
+0   0   0   0   0   0   8   1   0   0   5  
+0   0   0   0   0   0   0   0   0   0   7  
+0   0   0   0   0   0   0   0   0   0   0  
+```
+
