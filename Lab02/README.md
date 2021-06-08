@@ -6,6 +6,12 @@
 - [Task 5 - *k*-regular Graph Generator](#task-5---k-regular-graph-generator)
 - [Task 6 - Hamiltonian Cycle](#task-6---hamiltonian-cycle)
 
+***PLEASE MAKE SURE YOU HAVE ALL THE DEPENDENCIES LISTED IN `requirements.txt` INSTALLED***
+
+If you want to install all dependencies listed in `requirements.txt`, use command:
+
+`python3 -m pip install -r requirements.txt`)
+
 ### `ALL COMMANDS FROM README SHOULD BE EXECUTED FROM THE Lab02 DIRECTORY`
 
 ## Task 1 - Degree Sequence
