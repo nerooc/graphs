@@ -5,7 +5,7 @@ from lab02 import draw_two_graphs, pretty_print
 from lab03 import generate_random_graph, add_int_weights, visualizeMST, read_graph
 
 if __name__ == "__main__":
-    print("This program generates random coherent graph.")
+    print("This program generates random connected graph.")
     print("In input args set max vertices number and probability p: (G(n,p)).")
     max_vertices_num = 9
     probability = -1.0  # means random in generate_random_graph function

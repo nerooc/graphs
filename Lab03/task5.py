@@ -29,4 +29,5 @@ if __name__ == '__main__':
 		exit(-1)
 	
 	weighted_edges = kruskal(matrix)
+	print("Sum of MST weights:", sum(weight[1] for weight in weighted_edges))
 	visualizeMST(matrix, weighted_edges)
