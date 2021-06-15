@@ -10,15 +10,15 @@
  
 ## Task 1 - Weighted graph randomization
  
-The program generates random component graph with weights and write it to 'graph.txt' file for other tasks.
+The program generates random connected graph with weights and write it to 'graph.txt' file for other tasks.
  
 ### 1.1 How to run the program
  
 `python3 task1.py [max_vertices_number probability]`
 
-max_vertices_number - maximum number of vertices in graph (positive int)
+`max_vertices_number` - maximum number of vertices in graph (positive int)
 
-probability - probability that an edge exists between two vertices (G(n,p)) (float between 0.0 and 1.0)
+`probability` - probability that an edge exists between two vertices (G(n,p)) (float between 0.0 and 1.0)
  
 ## Task 2 - Dijkstra algorithm
  
