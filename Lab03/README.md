@@ -18,7 +18,7 @@ The program generates random component graph with weights and write it to 'graph
 
 max_vertices_number - maximum number of vertices in graph (positive int)
 
-probability - probability that an edge exists between two vertices (G(n,p))
+probability - probability that an edge exists between two vertices (G(n,p)) (float between 0.0 and 1.0)
  
 ## Task 2 - Dijkstra algorithm
  
