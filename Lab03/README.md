@@ -14,8 +14,9 @@ The program generates random component graph with weights and write it to 'graph
  
 ### 1.1 How to run the program
  
-`python3 task1.py [max_vertices_number]`
+`python3 task1.py [max_vertices_number probability]`
 max_vertices_number - maximum number of vertices in graph (positive int)
+probability - probability that an edge exists between two vertices (G(n,p))
  
 ## Task 2 - Dijkstra algorithm
  
