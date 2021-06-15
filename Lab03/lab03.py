@@ -55,9 +55,10 @@ def add_int_weights(adjacency_matrix, min_int_weight=1, max_int_weight=10):
     return adjacency_matrix_with_weights
 
 
-def generate_random_graph(max_vertex_num):
-    random_probability = random.uniform(0.0, 1.0)
-    adjacency_matrix = generate_graph_b(max_vertex_num, random_probability)
+def generate_random_graph(max_vertex_num, probability=-1.0):
+    if probability < 0.0:
+        probability = random.uniform(0.0, 1.0)
+    adjacency_matrix = generate_graph_b(max_vertex_num, float(probability))
     adjacency_matrix = [list(map(int, adjacency_matrix[i])) for i in range(len(adjacency_matrix))]  # convert to int
     mixed_adjacency_matrix = graph_randomization(adjacency_matrix)
     vertices_in_final_matrix = find_vertices_of_biggest_component(COMPONENTS(mixed_adjacency_matrix))
