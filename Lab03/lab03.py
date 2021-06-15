@@ -204,7 +204,7 @@ def get_graph_centre_from_distance_matrix(distance_matrix: list) -> dict:
 	"""
 	total_distance_from_others = {}
 	final_total_distances={} #we have plural form here cause there might be more than one graph centre
-	for index, row in enumerate(distance_matrix, start = 1):
+	for index, row in enumerate(distance_matrix, start = 0):
 		total_distance_from_others[index] = sum(row)
 	minval = min(total_distance_from_others.values())
 	indexes_of_centre_vertices = [k for k, v in total_distance_from_others.items() if v==minval]
@@ -223,7 +223,7 @@ def get_minimax_centre_from_distance_matrix(distance_matrix: list) -> dict:
 	"""
 	max_distances_to_farthest_vertex = {}
 	final_total_distances={} #we have plural form here cause there might be more than one minimax centre
-	for index, row in enumerate(distance_matrix, start = 1):
+	for index, row in enumerate(distance_matrix, start = 0):
 		max_distances_to_farthest_vertex[index] = max(row)
 	minval = min(max_distances_to_farthest_vertex.values())
 	indexes_of_centre_vertices = [k for k, v in max_distances_to_farthest_vertex.items() if v==minval]
