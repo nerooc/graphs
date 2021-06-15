@@ -60,7 +60,7 @@ The tests contain the function calls for:
  
 ## Task 4 - Graph center
  
-The program allows user to find center and minimax center of a graph. NOTE: When printing the center or minimax center, we assume graph nodes are numbered starting with value one for the first vertex.
+The program allows user to find center and minimax center of a graph. NOTE: When printing the center or minimax center, we assume graph nodes are numbered starting with value zero for the first vertex.
  
 ### 4.1 How to run the program
  
