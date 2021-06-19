@@ -23,19 +23,21 @@ if __name__ == '__main__':
         ]
 
         print("\nTEST #1 - Test for hardcoded matrix from the exemplary input file:\n")
-        result = ford_fulkerson(test_graph, 0, 10)
+        result, residual_network = ford_fulkerson(test_graph, 0, 10)
         print("Max flow of the given network: " + str(result))
+        display_result_max_flow(test_graph, residual_network)
         sys.exit("\nEnd of testing")
     #TESTING###########################################################################
 
     file_name = sys.argv[1]
     digraph = read_matrix_from_file(file_name)
-
     for r_i, r in enumerate(digraph):
         for c_i, c in enumerate(r):
             digraph[r_i][c_i] = int(digraph[r_i][c_i])
-
-    result = ford_fulkerson(digraph, 0, len(digraph) - 1)
+    digraph2 = np.array(digraph)
+    pretty_print(digraph)
+    print()
+    result, residual_network = ford_fulkerson(digraph, 0, len(digraph) - 1)
     print("Max flow of the given network: " + str(result))
-
+    display_result_max_flow(digraph2, residual_network)
     
