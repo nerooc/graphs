@@ -354,5 +354,21 @@ def ford_fulkerson(digraph: list, source: int, sink: int) -> int:
             residual_network[u][v] -= tmp_flow
             residual_network[v][u] += tmp_flow
             v = predecessors[v]
-    
-    return result
+    return result, residual_network
+
+
+def display_result_max_flow(digraph, residual_network):
+    G = nx.from_numpy_matrix(np.array(digraph), create_using=nx.DiGraph())
+    pos = nx.circular_layout(G)
+    nx.draw_circular(G)
+    labels = {i: i for i in G.nodes()}
+    nx.draw_networkx_labels(G, pos, labels, font_size=13)
+    for row in range(len(digraph)):
+        for col in range(len(digraph)):
+            if digraph[row][col] != 0:
+                label = str(residual_network[col][row]) + '/' + str(digraph[row][col])
+                G.add_edge(row, col, weight=label)
+
+    labels2 = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels2)
+    plt.show()
