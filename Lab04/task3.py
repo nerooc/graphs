@@ -16,7 +16,7 @@ if __name__ == '__main__':
         else:
             print("No correct input in program args, max_vertices_num = 7, source_vertex = 0")
         digraph = generate_real_random_complement_digraph(max_vertices_num)
-        digraph = add_weights_digraph(digraph, -5, 40)
+        digraph = add_weights_digraph(digraph, -5, 10)
     print()
     print("Graph with weights: ")
     pretty_print_w_inf(digraph)
