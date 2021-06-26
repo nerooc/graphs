@@ -46,7 +46,7 @@ The number of components in this graph: 4
 
 
 
-## Task 3 - Random Strongly Connected Components Digraph and Bellman-Ford's algorithm
+## Task 3 - Random Strongly Connected Coherent Digraph and Bellman-Ford's algorithm
 
 The program generates random complement digraph 
 and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex starting from chosen vertex.
