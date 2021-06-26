@@ -2,7 +2,7 @@ from lab04 import generate_real_random_complement_digraph, add_weights_digraph, 
 import sys
 
 if __name__ == '__main__':
-    print("This program generates random complement digraph.\nIn input args set [max vertices number and source vertex for bellman_ford], [file with graph] or nothing")
+    print("This program generates random coherent digraph.\nIn input args set [max vertices number and source vertex for bellman_ford], [file with graph] or nothing")
     max_vertices_num = 7
     source_vertex = 0
     digraph = []
