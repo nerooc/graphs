@@ -55,14 +55,14 @@ and runs Bellman-Ford algorithm on it to find all shortest paths to each vertex 
 
 `python3 task3.py [max_vertices_number source_vertex]`
 
-- max_vertices_number - program will generate digraph with max this number of vertices
-- source_vertex - source for Bellman-Ford (0 is first vertex)
+- `max_vertices_number` - program will generate digraph with max this number of vertices
+- `source_vertex` - source for Bellman-Ford (0 is first vertex)
 
 or
 
 `python3 task3.py [file_path]`
 
-- file_path - path to file with graph data
+- `file_path` - path to file with graph data
 
 ## Task 4 - Johnson's algorithm
  
